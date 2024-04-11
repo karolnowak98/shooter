@@ -1,4 +1,5 @@
 ﻿using GlassyCode.Shooter.Game.Weapons.Data;
+using GlassyCode.Shooter.Game.Weapons.Logic.Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -13,11 +14,11 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
         {
             Container.BindInstance(_config);
             
-            Container.Bind<WeaponManager>().AsSingle().WithArguments(_weaponSlots).NonLazy();
-            Container.Bind<ShootingController>().AsSingle().NonLazy();
+            Container.Bind(typeof(WeaponManager), typeof(IWeaponManager), 
+                typeof(ITickable)).To<WeaponManager>().AsSingle().WithArguments(_weaponSlots).NonLazy();
             
-            Container.Bind<ITickable>().To<WeaponManager>().FromResolve();
-            Container.Bind<ITickable>().To<ShootingController>().FromResolve();
+            Container.Bind(typeof(ShootingController), typeof(IShootingController), 
+                    typeof(ITickable)).To<ShootingController>().AsSingle();
         }
     }
 }

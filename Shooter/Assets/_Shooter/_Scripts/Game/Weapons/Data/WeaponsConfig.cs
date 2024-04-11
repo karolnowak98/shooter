@@ -1,4 +1,5 @@
-﻿using GlassyCode.Shooter.Core.Data;
+﻿using System.Collections.Generic;
+using GlassyCode.Shooter.Core.Data;
 using GlassyCode.Shooter.Game.Weapons.Enums;
 using UnityEngine;
 
@@ -11,6 +12,6 @@ namespace GlassyCode.Shooter.Game.Weapons.Data
         [SerializeField] private WeaponEntity[] _startingWeapons; //Using Odin I would make Dictionary<WeaponType, WeaponEntity> instead
         
         public WeaponType StartingSlot => _startingSlot;
-        public WeaponEntity[] StartingWeapons => _startingWeapons;
+        public IEnumerable<WeaponEntity> StartingWeapons => _startingWeapons;
     }
 }

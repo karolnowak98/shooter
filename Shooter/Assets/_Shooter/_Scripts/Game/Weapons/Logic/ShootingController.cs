@@ -1,25 +1,26 @@
 ﻿using System;
-using GlassyCode.Shooter.Game.Input.Logic;
+using GlassyCode.Shooter.Core.Input.Logic;
 using GlassyCode.Shooter.Game.Props.Logic;
+using GlassyCode.Shooter.Game.Weapons.Logic.Interfaces;
 using UnityEngine;
 using Zenject;
 using Object = UnityEngine.Object;
 
 namespace GlassyCode.Shooter.Game.Weapons.Logic
 {
-    public class ShootingController : ITickable
+    public class ShootingController : IShootingController, ITickable
     {
-        private InputManager _inputManager;
-        private WeaponManager _weaponManager;
+        private IInputManager _inputManager;
+        private IWeaponManager _weaponManager;
         private Transform _mainCam;
         private bool _isShooting;
         private float _lastShotTime;
         private float _nextRapidFireTime;
 
-        public event Action OnShoot;
+        public event Action<IDestroyable> OnShoot;
 
         [Inject]
-        private void Construct(InputManager inputManager, WeaponManager weaponManager)
+        private void Construct(IInputManager inputManager, IWeaponManager weaponManager)
         {
             _inputManager = inputManager;
             _weaponManager = weaponManager;
@@ -68,16 +69,17 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
         {
             var weaponInHand = _weaponManager.WeaponInHand;
             var data = weaponInHand.WeaponEntity;
+            IDestroyable hitObject = null;
 
             if (weaponInHand.AmmoInMagazine <= 0 || Time.time - _lastShotTime <= data.ShootCooldown) return;
 
             if (Physics.Raycast(_mainCam.position, _mainCam.forward, out var hit, data.Range))
             {
-                var destroyable = hit.collider.GetComponent<IDestroyable>();
+                hitObject = hit.collider.GetComponent<IDestroyable>();
 
-                if (destroyable != null && data.DestroyMaterials.Contains(destroyable.MaterialType))
+                if (hitObject != null && data.DestroyMaterials.Contains(hitObject.MaterialType))
                 {
-                    destroyable.TakeDamage(data.Damage);
+                    hitObject.TakeDamage(data.Damage);
                 }
                 
                 var bulletImpactParticle = data.BulletImpactParticle;
@@ -94,7 +96,7 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
             weaponInHand.AmmoInMagazine--;
             _lastShotTime = Time.time;
             
-            OnShoot?.Invoke();
+            OnShoot?.Invoke(hitObject);
 
             if (weaponInHand.AmmoInMagazine == 0 && weaponInHand.TotalAmmo > 0)
             {

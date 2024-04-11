@@ -1,4 +1,4 @@
-﻿using GlassyCode.Shooter.Game.Input.Logic;
+﻿using GlassyCode.Shooter.Core.Input.Logic;
 using GlassyCode.Shooter.Game.Player.Data;
 using UnityEngine;
 using Zenject;

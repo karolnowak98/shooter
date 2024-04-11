@@ -1,6 +1,6 @@
-﻿using GlassyCode.Shooter.Game.Player.Data;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
+using GlassyCode.Shooter.Game.Player.Data;
 
 namespace GlassyCode.Shooter.Game.Player.Logic
 {
@@ -28,9 +28,6 @@ namespace GlassyCode.Shooter.Game.Player.Logic
 
         private void BindInterfaces()
         {
-            Container.Bind<IInitializable>().To<CameraController>().FromResolve();
-            Container.Bind<ITickable>().To<CameraController>().FromResolve();
-
             Container.Bind<IInitializable>().To<MovementController>().FromResolve();
             Container.Bind<ITickable>().To<MovementController>().FromResolve();
             Container.Bind<IFixedTickable>().To<MovementController>().FromResolve();
@@ -38,7 +35,9 @@ namespace GlassyCode.Shooter.Game.Player.Logic
 
         private void BindClasses()
         {
-            Container.Bind<CameraController>().AsSingle().WithArguments(_playerCamHolder, _playerCameraPos, _playerOrientation);
+            Container.Bind(typeof(CameraController), typeof(ICameraController), typeof(ITickable))
+                .To<CameraController>().AsSingle().WithArguments(_playerCamHolder, _playerCameraPos, _playerOrientation);
+            
             Container.Bind<MovementController>().AsSingle().WithArguments(_playerOrientation, _playerRb, _player);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using GlassyCode.Shooter.Core.UI;
+using GlassyCode.Shooter.Game.Props.Logic;
 using GlassyCode.Shooter.Game.Weapons.Logic;
 using TMPro;
 using UnityEngine;
@@ -56,7 +57,7 @@ namespace GlassyCode.Shooter.Game.Weapons.UI
             weapon.OnReloadStart += () => UpdateReloadSliderVisibility(true);
         }
         
-        private void UpdateAmmo()
+        private void UpdateAmmo(IDestroyable hitObject = null)
         {
             _ammoInMagazineTmp.text = $"{_weaponManager.WeaponInHand.AmmoInMagazine}";
             _ammoTotalTmp.text = $"{_weaponManager.WeaponInHand.TotalAmmo}";

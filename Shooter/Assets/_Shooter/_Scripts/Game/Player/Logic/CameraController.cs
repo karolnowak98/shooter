@@ -1,11 +1,12 @@
-﻿using GlassyCode.Shooter.Game.Player.Data;
+﻿using GlassyCode.Shooter.Core.Cursors;
+using GlassyCode.Shooter.Game.Player.Data;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
 namespace GlassyCode.Shooter.Game.Player.Logic
 {
-    public class CameraController : ITickable, IInitializable
+    public class CameraController : ICameraController, ITickable
     {
         private CameraData _data;
         private Transform _holder;
@@ -13,6 +14,7 @@ namespace GlassyCode.Shooter.Game.Player.Logic
         private Transform _playerOrientation;
         private float _xRotation;
         private float _yRotation;
+        private bool _isCameraUnlocked;
 
         [Inject]
         private void Construct(CameraData data, Transform transform, Transform playerCameraPos, Transform playerOrientation)
@@ -23,16 +25,24 @@ namespace GlassyCode.Shooter.Game.Player.Logic
             _playerOrientation = playerOrientation;
         }
         
-        public void Initialize()
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        
         public void Tick()
         {
+            if (!_isCameraUnlocked) return;
+            
             CalculateRotation();
             UpdateCameraTransform();
+        }
+
+        public void LockCamera()
+        {
+            _isCameraUnlocked = false;
+            CursorController.UnlockCursor();
+        }
+
+        public void UnlockCamera()
+        {
+            CursorController.LockCursor();
+            _isCameraUnlocked = true;
         }
 
         private void CalculateRotation()
