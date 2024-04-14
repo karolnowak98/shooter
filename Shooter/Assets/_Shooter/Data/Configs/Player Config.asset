@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Player Config
   m_EditorClassIdentifier: 
   _cameraData:
-    _xSens: 65
-    _ySens: 65
+    _xSens: 30
+    _ySens: 30
     _minYAngle: -90
     _maxYAngle: 90
     _startingPosition: {x: 0, y: 1.2, z: 12}

@@ -9,7 +9,8 @@ namespace GlassyCode.Shooter.Core.Applications.UI
         [SerializeField, Tooltip("In seconds.")] 
         private int _fpsUpdateRate;
         
-        [SerializeField] private TextMeshProUGUI _fpsTmp;
+        [SerializeField] 
+        private TextMeshProUGUI _fpsTmp;
 
         private float _frameCount;
         private float _fps;

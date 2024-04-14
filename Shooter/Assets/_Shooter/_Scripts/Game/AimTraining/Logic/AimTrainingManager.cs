@@ -4,6 +4,7 @@ using GlassyCode.Shooter.Core.Time;
 using GlassyCode.Shooter.Game.AimTraining.Data;
 using GlassyCode.Shooter.Game.AimTraining.Logic.Interfaces;
 using GlassyCode.Shooter.Game.Player.Logic;
+using GlassyCode.Shooter.Game.Player.Logic.Interfaces;
 using GlassyCode.Shooter.Game.Weapons.Logic.Interfaces;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace GlassyCode.Shooter.Game.AimTraining.Logic
     {
         private IShootingController _shootingController;
         private ICameraController _cameraController;
+        private IMovementController _movementController;
         
         public ITargetsController TargetsController { get; private set; }
         public ITimer PreparationTimer { get; private set; }
@@ -21,11 +23,12 @@ namespace GlassyCode.Shooter.Game.AimTraining.Logic
         public event Action OnFinishRound;
 
         [Inject]
-        private void Construct(ITimeController timeController, ICameraController cameraController, 
+        private void Construct(ITimeController timeController, ICameraController cameraController, IMovementController movementController,
             IShootingController shootingController, IAimTrainingConfig config, BoxCollider targetsSpawnArea, GameObject targetPrefab)
         {
             _shootingController = shootingController;
             _cameraController = cameraController;
+            _movementController = movementController;
             
             var preparationTimerData = config.PreparationTimer;
             var roundTimerData = config.RoundTimer;
@@ -66,6 +69,7 @@ namespace GlassyCode.Shooter.Game.AimTraining.Logic
 
         private void StartRound()
         {
+            _movementController.EnableMovement();
             _cameraController.UnlockCamera();
             _shootingController.EnableShooting();
             RoundTimer.Restart();
@@ -74,6 +78,7 @@ namespace GlassyCode.Shooter.Game.AimTraining.Logic
 
         private void FinishRound()
         {
+            _movementController.DisableMovement();
             _cameraController.LockCamera();
             _shootingController.DisableShooting();
             OnFinishRound?.Invoke();

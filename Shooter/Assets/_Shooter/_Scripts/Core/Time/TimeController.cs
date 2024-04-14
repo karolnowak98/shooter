@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace GlassyCode.Shooter.Core.Time
@@ -12,7 +13,38 @@ namespace GlassyCode.Shooter.Core.Time
         public float FixedTime => UnityEngine.Time.fixedTime;
         public float UnscaledTime => UnityEngine.Time.unscaledTime;
 
-        public static void Pause() => UnityEngine.Time.timeScale = 0;
-        public static void Unpause() => UnityEngine.Time.timeScale = 1;
+        public static event Action OnPaused;
+        public static event Action OnResumed;
+        public static bool IsPaused { get; private set; }
+        
+        public static void Pause()
+        {
+            if (UnityEngine.Time.timeScale <= 0) return;
+            
+            UnityEngine.Time.timeScale = 0;
+            IsPaused = true;
+            OnPaused?.Invoke();
+        }
+
+        public static void Resume()
+        {
+            if (UnityEngine.Time.timeScale != 0) return;
+            
+            UnityEngine.Time.timeScale = 1;
+            IsPaused = false;
+            OnResumed?.Invoke();
+        }
+
+        public static void TogglePause()
+        {
+            if (UnityEngine.Time.timeScale > 0)
+            {
+                Pause();
+            }
+            else
+            {
+                Resume();
+            }
+        }
     }
 }

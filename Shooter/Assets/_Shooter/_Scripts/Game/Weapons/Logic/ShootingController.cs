@@ -86,8 +86,9 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
             if (ammoInMagazine <= 0 || Time.time - _lastShotTime <= data.ShootCooldown) return;
 
             var mainCamForward = _mainCam.forward;
-
-            if (Physics.Raycast(_mainCam.position, mainCamForward, out var hit, data.Range, LayerMask.GetMask("Prop")))
+            var layerMasks = LayerMask.GetMask("Prop") | LayerMask.GetMask("Ground");
+            
+            if (Physics.Raycast(_mainCam.position, mainCamForward, out var hit, data.Range, layerMasks))
             {
                 hitObject = hit.collider.GetComponent<IDestroyable>();
 

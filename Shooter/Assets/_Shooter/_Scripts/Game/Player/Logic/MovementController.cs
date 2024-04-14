@@ -16,6 +16,7 @@ namespace GlassyCode.Shooter.Game.Player.Logic
 
         private Vector3 _moveDirection;
         private bool _isGrounded;
+        private bool _canMove;
         private bool _canJump;
         private float _nextJumpTime;
 
@@ -45,6 +46,8 @@ namespace GlassyCode.Shooter.Game.Player.Logic
 
         public void Tick()
         {
+            if (!_canMove) return;
+            
             GetInput();
             AddDragForce();
             LimitMoveSpeed();
@@ -54,6 +57,16 @@ namespace GlassyCode.Shooter.Game.Player.Logic
         public void FixedTick()
         {
             AddMoveForce();
+        }
+
+        public void EnableMovement()
+        {
+            _canMove = true;
+        }
+
+        public void DisableMovement()
+        {
+            _canMove = false;
         }
 
         private void GetInput()

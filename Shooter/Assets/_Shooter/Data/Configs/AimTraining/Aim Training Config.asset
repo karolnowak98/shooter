@@ -16,5 +16,5 @@ MonoBehaviour:
     _countdownTime: 3
     _uiRefreshInterval: 1
   _roundTimer:
-    _countdownTime: 5
+    _countdownTime: 60
     _uiRefreshInterval: 0.1
