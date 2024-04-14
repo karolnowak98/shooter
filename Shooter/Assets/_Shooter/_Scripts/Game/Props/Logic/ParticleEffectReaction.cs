@@ -1,16 +1,15 @@
-﻿using UnityEngine;
+﻿using GlassyCode.Shooter.Core.Particles;
+using UnityEngine;
 
 namespace GlassyCode.Shooter.Game.Props.Logic
 {
     public class ParticleEffectReaction : DestroyReaction
     {
-        [SerializeField] private ParticleSystem _particle;
+        [SerializeField] private ParticleSystemData _particle;
         
         protected override void HandleDestroyReaction()
         {
-            var obj = Instantiate(_particle, transform.position, _particle.transform.rotation);
-            obj.Play();
-            Destroy(obj, _particle.main.duration);
+            _particle.PlayAndDestroy(transform);
         }
     }
 }

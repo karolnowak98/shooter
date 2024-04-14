@@ -1,7 +1,7 @@
-﻿using GlassyCode.Shooter.Game.Weapons.Data;
+﻿using UnityEngine;
+using GlassyCode.Shooter.Game.Weapons.Data;
 using GlassyCode.Shooter.Game.Weapons.Enums;
 using GlassyCode.Shooter.Game.Weapons.Logic.Interfaces;
-using UnityEngine;
 
 namespace GlassyCode.Shooter.Game.Weapons.Logic
 {

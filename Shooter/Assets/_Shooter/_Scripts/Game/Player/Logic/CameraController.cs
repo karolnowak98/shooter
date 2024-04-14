@@ -6,23 +6,28 @@ using Zenject;
 
 namespace GlassyCode.Shooter.Game.Player.Logic
 {
-    public class CameraController : ICameraController, ITickable
+    public class CameraController : ICameraController, IInitializable, ITickable
     {
         private CameraData _data;
         private Transform _holder;
-        private Transform _playerCameraPos;
+        private Transform _playerCameraPosition;
         private Transform _playerOrientation;
         private float _xRotation;
         private float _yRotation;
         private bool _isCameraUnlocked;
 
         [Inject]
-        private void Construct(CameraData data, Transform transform, Transform playerCameraPos, Transform playerOrientation)
+        private void Construct(CameraData data, Transform transform, Transform playerCameraPosition, Transform playerOrientation)
         {
             _data = data;
             _holder = transform;
-            _playerCameraPos = playerCameraPos;
+            _playerCameraPosition = playerCameraPosition;
             _playerOrientation = playerOrientation;
+        }
+        
+        public void Initialize()
+        {
+            ResetCamera();
         }
         
         public void Tick()
@@ -32,7 +37,7 @@ namespace GlassyCode.Shooter.Game.Player.Logic
             CalculateRotation();
             UpdateCameraTransform();
         }
-
+        
         public void LockCamera()
         {
             _isCameraUnlocked = false;
@@ -43,6 +48,16 @@ namespace GlassyCode.Shooter.Game.Player.Logic
         {
             CursorController.LockCursor();
             _isCameraUnlocked = true;
+        }
+
+        public void ResetCamera()
+        {
+            var startingRotation = _data.StartingRotation;
+
+            _yRotation = startingRotation.y;
+            _xRotation = startingRotation.x;
+            
+            UpdateCameraTransform();
         }
 
         private void CalculateRotation()
@@ -60,7 +75,7 @@ namespace GlassyCode.Shooter.Game.Player.Logic
         {
             _holder.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
             _playerOrientation.rotation = Quaternion.Euler(0, _yRotation, 0);
-            _holder.position = _playerCameraPos.position;
+            _holder.position = _playerCameraPosition.position;
         }
     }
 }

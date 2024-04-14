@@ -6,5 +6,7 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic.Interfaces
     public interface IShootingController
     {
         event Action<IDestroyable> OnShoot;
+        void EnableShooting();
+        void DisableShooting();
     }
 }

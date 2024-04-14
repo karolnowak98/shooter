@@ -7,7 +7,7 @@ namespace GlassyCode.Shooter.Game.Props.Logic
     {
         private IDestroyable _destroyable;
         
-        private void Awake()
+        protected virtual void Awake()
         {
             _destroyable = GetComponent<IDestroyable>();
         }

@@ -15,9 +15,11 @@ MonoBehaviour:
   _id: 1
   _type: 1
   _prefab: {fileID: 1369102897581523165, guid: d0f30baa806635d4e98b2ba53f82baf3, type: 3}
+  _shotSound: {fileID: 326483554722132880, guid: cbc2e2e44e6409b4d95839580d276793, type: 3}
+  _reloadSound: {fileID: 326483554722132880, guid: b16b1bfbc2d07f545a48a775f64049a0, type: 3}
+  _bulletImpactParticleData: {fileID: -5402367081606129317, guid: ca78c635fc80e8342b38aab324a3d3a8, type: 3}
   _icon: {fileID: 21300044, guid: 6674e8c43c63e4f4184cbd009379498d, type: 3}
   _ammoIcon: {fileID: 21300004, guid: 5163ae49a0de665458bba61cd20c99b1, type: 3}
-  _bulletImpactParticle: {fileID: 19800002, guid: ca78c635fc80e8342b38aab324a3d3a8, type: 3}
   _damage: 20
   _destroyMaterials: 0000000004000000
   _shootCooldown: 0.08

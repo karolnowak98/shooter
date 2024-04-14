@@ -1,10 +1,13 @@
 ﻿using System;
+using GlassyCode.Shooter.Core.Audio.Logic;
+using UnityEngine;
+using Object = UnityEngine.Object;
+using Zenject;
 using GlassyCode.Shooter.Core.Input.Logic;
+using GlassyCode.Shooter.Core.Particles;
+using GlassyCode.Shooter.Game.Player.Logic.Interfaces;
 using GlassyCode.Shooter.Game.Props.Logic;
 using GlassyCode.Shooter.Game.Weapons.Logic.Interfaces;
-using UnityEngine;
-using Zenject;
-using Object = UnityEngine.Object;
 
 namespace GlassyCode.Shooter.Game.Weapons.Logic
 {
@@ -12,7 +15,10 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
     {
         private IInputManager _inputManager;
         private IWeaponManager _weaponManager;
+        private IMovementController _movementController;
+        
         private Transform _mainCam;
+        private bool _canShoot;
         private bool _isShooting;
         private float _lastShotTime;
         private float _nextRapidFireTime;
@@ -20,10 +26,11 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
         public event Action<IDestroyable> OnShoot;
 
         [Inject]
-        private void Construct(IInputManager inputManager, IWeaponManager weaponManager)
+        private void Construct(IInputManager inputManager, IWeaponManager weaponManager, IMovementController movementController)
         {
             _inputManager = inputManager;
             _weaponManager = weaponManager;
+            _movementController = movementController;
 
             _inputManager.OnLmbPerformed += StartShooting;
             _inputManager.OnLmbCanceled += StopShooting;
@@ -35,16 +42,29 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
             }
             else
             {
-                Debug.LogWarning("Main cam has not been found on the scene!!");
+                Debug.LogError(nameof(Camera.main) + " has not been found on the scene!");
             }
         }
 
         public void Tick()
         {
-            if (_isShooting && _weaponManager.WeaponInHand.WeaponEntity.IsRapidFire)
+            if (!_isShooting) return;
+            
+            if (_weaponManager.WeaponInHand.WeaponEntity.IsRapidFire)
             {
                 HandleRapidFire();
             }
+        }
+
+
+        public void EnableShooting()
+        {
+            _canShoot = true;
+        }
+
+        public void DisableShooting()
+        {
+            _canShoot = false;
         }
 
         private void HandleRapidFire()
@@ -56,24 +76,18 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
             }
         }
 
-        private void StartShooting()
-        {
-            if (_weaponManager.WeaponInHand.IsReloading) return;
-
-            _isShooting = true;
-            Shoot();
-            _nextRapidFireTime = Time.time + _weaponManager.WeaponInHand.WeaponEntity.ShootCooldown;
-        }
-
         private void Shoot()
         {
             var weaponInHand = _weaponManager.WeaponInHand;
+            var ammoInMagazine = weaponInHand.AmmoInMagazine;
             var data = weaponInHand.WeaponEntity;
             IDestroyable hitObject = null;
 
-            if (weaponInHand.AmmoInMagazine <= 0 || Time.time - _lastShotTime <= data.ShootCooldown) return;
+            if (ammoInMagazine <= 0 || Time.time - _lastShotTime <= data.ShootCooldown) return;
 
-            if (Physics.Raycast(_mainCam.position, _mainCam.forward, out var hit, data.Range))
+            var mainCamForward = _mainCam.forward;
+
+            if (Physics.Raycast(_mainCam.position, mainCamForward, out var hit, data.Range, LayerMask.GetMask("Prop")))
             {
                 hitObject = hit.collider.GetComponent<IDestroyable>();
 
@@ -81,24 +95,18 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
                 {
                     hitObject.TakeDamage(data.Damage);
                 }
-                
-                var bulletImpactParticle = data.BulletImpactParticle;
 
-                if (bulletImpactParticle != null)
-                {
-                    var rotation = Quaternion.LookRotation(-_mainCam.forward, Vector3.up);
-                    var obj = Object.Instantiate(bulletImpactParticle, hit.point, rotation);
-                    obj.Play();
-                    Object.Destroy(obj.gameObject, bulletImpactParticle.main.duration);
-                }
+                var rotation = Quaternion.LookRotation(-mainCamForward, Vector3.up);
+                data.BulletImpactParticleData.PlayAndDestroy(hit.point, rotation);
             }
 
-            weaponInHand.AmmoInMagazine--;
+            data.ShotSound.Play(_movementController.Player);
+            ammoInMagazine--;
             _lastShotTime = Time.time;
             
             OnShoot?.Invoke(hitObject);
 
-            if (weaponInHand.AmmoInMagazine == 0 && weaponInHand.TotalAmmo > 0)
+            if (ammoInMagazine <= 0 && weaponInHand.TotalAmmo > 0)
             {
                 StartReload();
             }
@@ -115,7 +123,20 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
 
             StopShooting();
         }
+        
+        private void StartShooting()
+        {
+            if (!_canShoot) return;
+            if (_weaponManager.WeaponInHand.IsReloading) return;
 
-        private void StopShooting() => _isShooting = false;
+            _isShooting = true;
+            Shoot();
+            _nextRapidFireTime = Time.time + _weaponManager.WeaponInHand.WeaponEntity.ShootCooldown;
+        }
+        
+        private void StopShooting()
+        {
+            _isShooting = false;
+        }
     }
 }

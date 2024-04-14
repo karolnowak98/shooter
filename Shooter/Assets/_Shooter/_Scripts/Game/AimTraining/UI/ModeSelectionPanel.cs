@@ -1,8 +1,8 @@
-using GlassyCode.Shooter.Core.UI;
-using GlassyCode.Shooter.Game.AimTraining.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using GlassyCode.Shooter.Core.UI;
+using GlassyCode.Shooter.Game.AimTraining.Logic.Interfaces;
 
 namespace GlassyCode.Shooter.Game.AimTraining.UI
 {
@@ -10,20 +10,25 @@ namespace GlassyCode.Shooter.Game.AimTraining.UI
     {
         [SerializeField] private Button _button;
 
-        private IAimTrainingController _aimTrainingController;
+        private IAimTrainingManager _aimTrainingManager;
         
         [Inject]
-        private void Construct(IAimTrainingController aimTrainingController)
+        private void Construct(IAimTrainingManager aimTrainingManager)
         {
-            _aimTrainingController = aimTrainingController;
+            _aimTrainingManager = aimTrainingManager;
             
-            _button.onClick.AddListener(_aimTrainingController.StartRound);
-            _button.onClick.AddListener(Hide);
+            _button.onClick.AddListener(StartRound);
         }
 
         private void OnDestroy()
         {
             _button.onClick.RemoveAllListeners();
+        }
+
+        private void StartRound()
+        {
+            _aimTrainingManager.StartPreparation();
+            Hide();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
+using UnityEngine;
 using GlassyCode.Shooter.Game.Props.Data;
 using GlassyCode.Shooter.Game.Props.Enums;
-using UnityEngine;
 
 namespace GlassyCode.Shooter.Game.Props.Logic
 {

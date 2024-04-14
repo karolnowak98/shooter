@@ -1,38 +1,46 @@
-﻿using GlassyCode.Shooter.Core.Input.Logic;
+﻿using System;
+using GlassyCode.Shooter.Core.Input.Logic;
 using GlassyCode.Shooter.Game.Player.Data;
+using GlassyCode.Shooter.Game.Player.Logic.Interfaces;
 using UnityEngine;
 using Zenject;
 
 namespace GlassyCode.Shooter.Game.Player.Logic
 {
-    public class MovementController : IInitializable, ITickable, IFixedTickable
+    public class MovementController : IMovementController, IInitializable, ITickable, IFixedTickable, IDisposable
     {
-        private InputManager _inputManager;
+        private IInputManager _inputManager;
         private MovementData _movementData;
         private Rigidbody _rb;
         private Transform _orientation;
-        private Transform _player;
 
         private Vector3 _moveDirection;
         private bool _isGrounded;
         private bool _canJump;
         private float _nextJumpTime;
 
+        public Transform Player { get; private set; }
+
         [Inject]
-        private void Construct(InputManager inputManager, MovementData data, Transform orientation, Transform playerTransform, Rigidbody rb)
+        private void Construct(IInputManager inputManager, MovementData data, Transform orientation, Transform playerTransform, Rigidbody rb)
         {
             _inputManager = inputManager;
             _movementData = data;
             _orientation = orientation;
-            _player = playerTransform;
+            Player = playerTransform;
             _rb = rb;
 
             _inputManager.OnSpacePressed += Jump;
         }
-
+        
         public void Initialize()
         {
             _rb.freezeRotation = true;
+        }
+        
+        public void Dispose()
+        {
+            _inputManager.OnSpacePressed -= Jump;
         }
 
         public void Tick()
@@ -95,7 +103,7 @@ namespace GlassyCode.Shooter.Game.Player.Logic
                 velocity = new Vector3(velocity.x, 0f, velocity.z);
                 
                 _rb.velocity = velocity;
-                _rb.AddForce(_player.up * _movementData.JumpForce, ForceMode.Impulse);
+                _rb.AddForce(Player.up * _movementData.JumpForce, ForceMode.Impulse);
                 _nextJumpTime = Time.time + _movementData.JumpCooldown;
             }
         }

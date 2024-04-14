@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3161432540194af785141a072bc7e671, type: 3}
   m_Name: Aim Training Config
   m_EditorClassIdentifier: 
-  _roundLength: 60
-  _timerUIRefreshInterval: 1
+  _preparationTimer:
+    _countdownTime: 3
+    _uiRefreshInterval: 1
+  _roundTimer:
+    _countdownTime: 5
+    _uiRefreshInterval: 0.1

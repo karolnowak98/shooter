@@ -1,9 +1,11 @@
 using System;
+using UnityEngine;
 
 namespace GlassyCode.Shooter.Core.Input.Logic
 {
     public interface IInputManager
     {
+        Vector2 MoveAxis { get; }
         event Action OnLmbPerformed;
         event Action OnLmbCanceled;
         event Action OnBtn1Pressed;
