@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using GlassyCode.Shooter.Game.Weapons.Data;
 using GlassyCode.Shooter.Game.Weapons.Enums;
-using GlassyCode.Shooter.Game.Weapons.Logic.Interfaces;
 
 namespace GlassyCode.Shooter.Game.Weapons.Logic
 {
@@ -13,13 +12,15 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
         public WeaponType Type => _data.Type;
         public Transform Transform => _data.Transform;
         
-        
         public WeaponSlot(WeaponSlotData data)
         {
             _data = data;
         }
 
-        public void PickUpWeapon(IWeapon weapon) => Weapon = weapon;
+        public void PickUpWeapon(IWeapon weapon)
+        {
+            Weapon = weapon;
+        }
 
         public void EquipWeapon()
         {

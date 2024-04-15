@@ -2,15 +2,15 @@ using UnityEngine;
 
 namespace GlassyCode.Shooter.Core.Cursors
 {
-    public static class CursorController
+    public class CursorController : ICursorController
     {
-        public static void UnlockCursor()
+        public void UnlockCursor()
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
         
-        public static void LockCursor()
+        public void LockCursor()
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using Zenject;
 using GlassyCode.Shooter.Core.UI;
-using GlassyCode.Shooter.Game.AimTraining.Logic.Interfaces;
+using GlassyCode.Shooter.Game.AimTraining.Logic;
 
 namespace GlassyCode.Shooter.Game.AimTraining.UI
 {
@@ -39,23 +39,23 @@ namespace GlassyCode.Shooter.Game.AimTraining.UI
         {
             _hitsTmp.text = "0";
             _missesTmp.text = "0";
-            _timeLeftTmp.text = remainingTime.ToString("0.0");
+            _timeLeftTmp.text = $"{remainingTime:N1}";
             Show();
         }
 
         private void SetTimeLeftTmp(float seconds)
         {
-            _timeLeftTmp.text = seconds.ToString("0.0");
+            _timeLeftTmp.text = $"{seconds:N1}";
         }
 
         private void SetHitsTmp(uint hits)
         {
-            _hitsTmp.text = hits.ToString();
+            _hitsTmp.text = $"{hits}";
         }
         
         private void SetMissesTmp(uint misses)
         {
-            _missesTmp.text = misses.ToString();
+            _missesTmp.text = $"{misses}";
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿using GlassyCode.Shooter.Core.UI;
+﻿using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using Zenject;
+using GlassyCode.Shooter.Core.UI;
 using GlassyCode.Shooter.Game.Props.Logic;
 using GlassyCode.Shooter.Game.Weapons.Logic;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-using Zenject;
+using GlassyCode.Shooter.Game.Weapons.Logic.Shooting;
 
 namespace GlassyCode.Shooter.Game.Weapons.UI
 {
@@ -17,11 +18,11 @@ namespace GlassyCode.Shooter.Game.Weapons.UI
         [SerializeField] private Image _weaponIcon;
         [SerializeField] private Slider _reloadSlider;
 
-        private WeaponManager _weaponManager;
-        private ShootingController _shootingController;
+        private IWeaponManager _weaponManager;
+        private IShootingController _shootingController;
 
         [Inject]
-        private void Construct(WeaponManager weaponManager, ShootingController shootingController)
+        private void Construct(IWeaponManager weaponManager, IShootingController shootingController)
         {
             _weaponManager = weaponManager;
             _shootingController = shootingController;
@@ -74,6 +75,9 @@ namespace GlassyCode.Shooter.Game.Weapons.UI
             _reloadSlider.value = progress;
         }
 
-        private void UpdateReloadSliderVisibility(bool isVisible) => _reloadSlider.gameObject.SetActive(isVisible);
+        private void UpdateReloadSliderVisibility(bool isVisible)
+        {
+            _reloadSlider.gameObject.SetActive(isVisible);
+        }
     }
 }

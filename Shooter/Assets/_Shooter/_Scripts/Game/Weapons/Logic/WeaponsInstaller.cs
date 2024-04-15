@@ -1,7 +1,7 @@
-﻿using GlassyCode.Shooter.Game.Weapons.Data;
-using GlassyCode.Shooter.Game.Weapons.Logic.Interfaces;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
+using GlassyCode.Shooter.Game.Weapons.Data;
+using GlassyCode.Shooter.Game.Weapons.Logic.Shooting;
 
 namespace GlassyCode.Shooter.Game.Weapons.Logic
 {
@@ -12,7 +12,7 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
             
         public override void InstallBindings()
         {
-            Container.BindInstance(_config);
+            Container.Bind<IWeaponsConfig>().To<WeaponsConfig>().FromInstance(_config).AsSingle();
             
             Container.Bind(typeof(WeaponManager), typeof(IWeaponManager), 
                 typeof(ITickable)).To<WeaponManager>().AsSingle().WithArguments(_weaponSlots).NonLazy();

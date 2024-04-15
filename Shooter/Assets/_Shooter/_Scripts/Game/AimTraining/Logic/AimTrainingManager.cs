@@ -1,12 +1,15 @@
 using System;
+using UnityEngine;
 using Zenject;
 using GlassyCode.Shooter.Core.Time;
 using GlassyCode.Shooter.Game.AimTraining.Data;
-using GlassyCode.Shooter.Game.AimTraining.Logic.Interfaces;
-using GlassyCode.Shooter.Game.Player.Logic;
-using GlassyCode.Shooter.Game.Player.Logic.Interfaces;
-using GlassyCode.Shooter.Game.Weapons.Logic.Interfaces;
-using UnityEngine;
+using GlassyCode.Shooter.Game.AimTraining.Enums;
+using GlassyCode.Shooter.Game.AimTraining.Logic.Targets;
+using GlassyCode.Shooter.Game.AimTraining.Logic.Timers;
+using GlassyCode.Shooter.Game.Player.Logic.Cameras;
+using GlassyCode.Shooter.Game.Player.Logic.Movement;
+using GlassyCode.Shooter.Game.Weapons.Logic;
+using GlassyCode.Shooter.Game.Weapons.Logic.Shooting;
 
 namespace GlassyCode.Shooter.Game.AimTraining.Logic
 {
@@ -20,22 +23,23 @@ namespace GlassyCode.Shooter.Game.AimTraining.Logic
         public ITimer PreparationTimer { get; private set; }
         public ITimer RoundTimer { get; private set; }
         
-        public event Action OnFinishRound;
+        public event Action<RoundResult> OnRoundFinished; // <roundResult>
+        public event Action OnRoundPrepared; 
 
         [Inject]
         private void Construct(ITimeController timeController, ICameraController cameraController, IMovementController movementController,
             IShootingController shootingController, IAimTrainingConfig config, BoxCollider targetsSpawnArea, GameObject targetPrefab)
         {
+            var preparationTimerData = config.PreparationTimer;
+            var roundTimerData = config.RoundTimer;
+            
             _shootingController = shootingController;
             _cameraController = cameraController;
             _movementController = movementController;
             
-            var preparationTimerData = config.PreparationTimer;
-            var roundTimerData = config.RoundTimer;
-            
             PreparationTimer = new PreparationTimer(timeController, preparationTimerData.CountdownTime, preparationTimerData.UIRefreshInterval);
             RoundTimer = new RoundTimer(cameraController, timeController, roundTimerData.CountdownTime, roundTimerData.UIRefreshInterval);
-            TargetsController = new TargetsController(shootingController, targetsSpawnArea, targetPrefab);
+            TargetsController = new TargetsController(shootingController, targetsSpawnArea, targetPrefab, config.SuccessConditionsDataData);
         }
 
         public void Tick()
@@ -50,21 +54,22 @@ namespace GlassyCode.Shooter.Game.AimTraining.Logic
             StartPreparation();
         }
         
-        public void StartPreparation()
+        private void ResetRound()
         {
+            RoundTimer.Reset();
+            PreparationTimer.Reset();
+            TargetsController.Reset();
             _cameraController.ResetCamera();
+            RoundTimer.OnTimerExpired -= FinishRound;
+            PreparationTimer.OnTimerExpired -= StartRound;
+        }
+        
+        private void StartPreparation()
+        {
             RoundTimer.OnTimerExpired += FinishRound;
             PreparationTimer.OnTimerExpired += StartRound;
             PreparationTimer.Restart();
-        }
-
-        private void ResetRound()
-        {
-            RoundTimer.OnTimerExpired -= FinishRound;
-            PreparationTimer.OnTimerExpired -= StartRound;
-            RoundTimer.Reset();
-            PreparationTimer.Reset();
-            TargetsController.ResetStats();
+            OnRoundPrepared?.Invoke();
         }
 
         private void StartRound()
@@ -72,8 +77,10 @@ namespace GlassyCode.Shooter.Game.AimTraining.Logic
             _movementController.EnableMovement();
             _cameraController.UnlockCamera();
             _shootingController.EnableShooting();
-            RoundTimer.Restart();
+            
             TargetsController.SpawnTargetAtRandomPosition();
+            RoundTimer.Restart();
+            OnRoundPrepared?.Invoke();
         }
 
         private void FinishRound()
@@ -81,7 +88,8 @@ namespace GlassyCode.Shooter.Game.AimTraining.Logic
             _movementController.DisableMovement();
             _cameraController.LockCamera();
             _shootingController.DisableShooting();
-            OnFinishRound?.Invoke();
+
+            OnRoundFinished?.Invoke(TargetsController.AreSuccessConditionsMet ? RoundResult.Success : RoundResult.Failure);
         }
     }
 }

@@ -1,6 +1,6 @@
 using Zenject;
 using GlassyCode.Shooter.Core.UI;
-using GlassyCode.Shooter.Game.AimTraining.Logic.Interfaces;
+using GlassyCode.Shooter.Game.AimTraining.Logic;
 
 namespace GlassyCode.Shooter.Game.AimTraining.UI
 {

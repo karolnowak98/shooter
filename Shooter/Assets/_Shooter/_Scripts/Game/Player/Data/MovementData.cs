@@ -7,30 +7,40 @@ namespace GlassyCode.Shooter.Game.Player.Data
     public struct MovementData
     {
         [Header("Movement Speed")]
-        [SerializeField, Tooltip("The base movement speed of the player.")]
+        [Tooltip("The base movement speed of the player.")]
+        [SerializeField]
         private float _moveSpeed;
 
-        [SerializeField, Tooltip("The maximum movement speed of the player.")]
+        [Header("Max Movement Speed")]
+        [Tooltip("The maximum movement speed of the player.")]
+        [SerializeField]
         private float _maxMoveSpeed;
 
-        [SerializeField, Tooltip("The height of the player character.")]
+        [Header("Player Height")]
+        [Tooltip("The height of the player character.")]
+        [SerializeField]
         private float _playerHeight;
-        
+
         [Header("Jumping")]
-        [SerializeField, Tooltip("The force applied when jumping.")]
+        [Tooltip("The force applied when jumping.")]
+        [SerializeField]
         private float _jumpForce;
 
-        [SerializeField, Tooltip("The cooldown time between jumps.")]
+        [Tooltip("The cooldown time between jumps.")]
+        [SerializeField]
         private float _jumpCooldown;
 
-        [SerializeField, Tooltip("Multiplier applied to movement while in the air.")]
+        [Tooltip("Multiplier applied to movement while in the air.")]
+        [SerializeField]
         private float _airMultiplier;
 
         [Header("Other Properties")]
-        [SerializeField, Tooltip("The drag force applied to the player.")]
+        [Tooltip("The drag force applied to the player.")]
+        [SerializeField]
         private float _dragForce;
 
-        [SerializeField, Tooltip("Layer mask used to detect the ground.")]
+        [Tooltip("Layer mask used to detect the ground.")]
+        [SerializeField]
         private LayerMask _groundMask;
 
         public float MoveSpeed => _moveSpeed;

@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using Zenject;
 using GlassyCode.Shooter.Core.UI;
-using GlassyCode.Shooter.Game.AimTraining.Logic.Interfaces;
+using GlassyCode.Shooter.Game.AimTraining.Logic;
 
 namespace GlassyCode.Shooter.Game.AimTraining.UI
 {
@@ -31,13 +31,13 @@ namespace GlassyCode.Shooter.Game.AimTraining.UI
 
         private void ResetPanel(float remainingSeconds)
         {
-            _countingDownTmp.text = remainingSeconds.ToString("0");
+            _countingDownTmp.text = $"{remainingSeconds:N0}";
             Show();
         }
         
         private void SetCountingDownTmp(float seconds)
         {
-            _countingDownTmp.text = seconds.ToString("0");
+            _countingDownTmp.text = $"{seconds:N0}";
         }
     }
 }

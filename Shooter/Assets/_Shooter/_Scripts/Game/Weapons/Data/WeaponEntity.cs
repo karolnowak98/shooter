@@ -1,22 +1,23 @@
-﻿using System.Collections.Generic;
-using GlassyCode.Shooter.Core.Audio.Data;
+﻿using UnityEngine;
+using System.Collections.Generic;
+using GlassyCode.Shooter.Core.Audio;
 using GlassyCode.Shooter.Core.Data;
 using GlassyCode.Shooter.Core.Particles;
 using GlassyCode.Shooter.Game.Props.Enums;
 using GlassyCode.Shooter.Game.Weapons.Enums;
-using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace GlassyCode.Shooter.Game.Weapons.Data
 {
     [CreateAssetMenu(menuName = "Entities/Weapon Entity", fileName = "Weapon Entity")]
-    public class WeaponEntity : Entity
+    public class WeaponEntity : Entity, IWeaponEntity
     {
         [Header("General Settings")]
-        [SerializeField, Tooltip("The type of the weapon.")]
+        [Tooltip("The type of the weapon.")]
+        [SerializeField]
         private WeaponType _type;
 
-        [SerializeField, Tooltip("The prefab representing the weapon.")]
+        [Tooltip("The prefab representing the weapon.")]
+        [SerializeField]
         private GameObject _prefab;
 
         [Header("Audio")]
@@ -25,43 +26,52 @@ namespace GlassyCode.Shooter.Game.Weapons.Data
 
         [SerializeField]
         private AudioSourceData _reloadSound;
-        
-        [FormerlySerializedAs("_bulletImpactParticle")]
+
         [Header("Visuals")]
-        [SerializeField, Tooltip("The particle system data for bullet impact.")]
+        [Tooltip("The particle system data for bullet impact.")]
+        [SerializeField]
         private ParticleSystemData _bulletImpactParticleData;
-        
-        [SerializeField, Tooltip("The icon of the weapon.")]
+
+        [Tooltip("The icon of the weapon.")]
+        [SerializeField]
         private Sprite _icon;
 
-        [SerializeField, Tooltip("The icon representing the ammo for this weapon.")]
+        [Tooltip("The icon representing the ammo for this weapon.")]
+        [SerializeField]
         private Sprite _ammoIcon;
 
         [Header("Combat")]
-        [SerializeField, Tooltip("The base damage dealt by the weapon.")]
+        [Tooltip("The base damage dealt by the weapon.")]
+        [SerializeField]
         private int _damage;
 
-        [SerializeField, Tooltip("List of materials that the weapon can destroy.")]
+        [Tooltip("List of materials that the weapon can destroy.")]
+        [SerializeField]
         private List<PropMaterialType> _destroyMaterials;
 
         [Header("Shooting")]
-        
-        [SerializeField, Tooltip("Cooldown between shots.")]
+        [Tooltip("Cooldown between shots.")]
+        [SerializeField]
         private float _shootCooldown;
 
-        [SerializeField, Tooltip("Maximum range of the weapon.")]
+        [Tooltip("Maximum range of the weapon.")]
+        [SerializeField]
         private float _range;
 
-        [SerializeField, Tooltip("Is the weapon capable of rapid fire?")]
+        [Tooltip("Is the weapon capable of rapid fire?")]
+        [SerializeField]
         private bool _isRapidFire;
-        
-        [SerializeField, Tooltip("Number of magazines the weapon starts with.")]
+
+        [Tooltip("Number of magazines the weapon starts with.")]
+        [SerializeField]
         private int _numberOfMagazines;
 
-        [SerializeField, Tooltip("Number of bullets in a magazine.")]
+        [Tooltip("Number of bullets in a magazine.")]
+        [SerializeField]
         private int _numberOfBulletsInMagazine;
-        
-        [SerializeField, Tooltip("CountdownTime it takes to reload the weapon.")]
+
+        [Tooltip("CountdownTime it takes to reload the weapon.")]
+        [SerializeField]
         private float _reloadTime;
 
         public WeaponType Type => _type;

@@ -1,17 +1,20 @@
 using UnityEngine;
 
-namespace GlassyCode.Shooter.Core.Audio.Data
+namespace GlassyCode.Shooter.Core.Audio
 {
     [RequireComponent(typeof(AudioSource))]
     public class AudioSourceData : MonoBehaviour
     {
-        [SerializeField, Tooltip("Volume range of the sound.")]
+        [Tooltip("Volume range of the sound.")]
+        [SerializeField]
         private Vector2 _volumeRanges;
 
-        [SerializeField, Tooltip("Pitch range of the sound.")]
+        [Tooltip("Pitch range of the sound.")]
+        [SerializeField]
         private Vector2 _pitchRanges;
 
-        [SerializeField, Tooltip("Transition between 2D and 3D sound.")]
+        [Tooltip("Transition between 2D and 3D sound.")]
+        [SerializeField]
         private Vector2 _spatialBlend;
 
         public AudioSource AudioSource { get; private set; }

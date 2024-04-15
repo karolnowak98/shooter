@@ -6,10 +6,10 @@ namespace GlassyCode.Shooter.Core.Applications.Logic
 {
     public class ApplicationController : IApplicationController, IInitializable
     {
-        private ApplicationConfig _applicationConfig;
+        private IApplicationConfig _applicationConfig;
 
         [Inject]
-        private void Construct(ApplicationConfig applicationConfig)
+        private void Construct(IApplicationConfig applicationConfig)
         {
             _applicationConfig = applicationConfig;
         }

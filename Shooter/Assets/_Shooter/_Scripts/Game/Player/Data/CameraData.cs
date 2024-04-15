@@ -7,17 +7,21 @@ namespace GlassyCode.Shooter.Game.Player.Data
     public struct CameraData
     {
         [Header("Sensitivity")]
-        [SerializeField, Tooltip("The horizontal sensitivity of the camera.")]
+        [Tooltip("The horizontal sensitivity of the camera.")]
+        [SerializeField]
         private float _xSens;
 
-        [SerializeField, Tooltip("The vertical sensitivity of the camera.")]
+        [Tooltip("The vertical sensitivity of the camera.")]
+        [SerializeField]
         private float _ySens;
 
         [Header("Angle Constraints")]
-        [SerializeField, Tooltip("The minimum angle in the y-axis.")]
+        [Tooltip("The minimum angle in the y-axis.")]
+        [SerializeField]
         private float _minYAngle;
 
-        [SerializeField, Tooltip("The maximum angle in the y-axis.")]
+        [Tooltip("The maximum angle in the y-axis.")]
+        [SerializeField]
         private float _maxYAngle;
         
         [Header("Transform")] 

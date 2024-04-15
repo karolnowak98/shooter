@@ -1,8 +1,7 @@
 ﻿using System;
-using GlassyCode.Shooter.Game.Weapons.Data;
-using GlassyCode.Shooter.Game.Weapons.Logic.Interfaces;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using GlassyCode.Shooter.Game.Weapons.Data;
 
 namespace GlassyCode.Shooter.Game.Weapons.Logic
 {
@@ -10,7 +9,7 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
     {
         private float _reloadStartTime;
 
-        public WeaponEntity WeaponEntity { get; }
+        public IWeaponEntity WeaponEntity { get; }
         public int TotalAmmo { get; private set; }
         public int AmmoInMagazine { get; set; }
         public bool IsReloading { get; set; }
@@ -18,7 +17,7 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
         public event Action OnReloadStart;
         public event Action<float> OnReloadProgressChanged;
 
-        public Weapon(WeaponEntity weaponEntity, Transform weaponSlot)
+        public Weapon(IWeaponEntity weaponEntity, Transform weaponSlot)
         {
             WeaponEntity = weaponEntity;
             TotalAmmo = WeaponEntity.NumberOfBulletsInMagazine * WeaponEntity.NumberOfMagazines;

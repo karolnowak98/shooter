@@ -1,6 +1,5 @@
-using GlassyCode.Shooter.Core.Audio.Data;
-using GlassyCode.Shooter.Core.Audio.Logic;
 using UnityEngine;
+using GlassyCode.Shooter.Core.Audio;
 
 namespace GlassyCode.Shooter.Game.Props.Logic
 {

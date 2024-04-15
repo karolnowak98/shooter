@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using GlassyCode.Shooter.Core.Input.Logic;
+using Zenject;
+using GlassyCode.Shooter.Core.Input;
 using GlassyCode.Shooter.Game.Weapons.Data;
 using GlassyCode.Shooter.Game.Weapons.Enums;
-using GlassyCode.Shooter.Game.Weapons.Logic.Interfaces;
-using Zenject;
 
 namespace GlassyCode.Shooter.Game.Weapons.Logic
 {
     public class WeaponManager : IWeaponManager, ITickable
     {
         private readonly Dictionary<WeaponType, IWeaponSlot> _slotsByType = new();
+        
         private IInputManager _inputManager;
         private IWeaponSlot _selectedSlot;
         
@@ -19,7 +19,7 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
         public event Action OnWeaponChanged;
 
         [Inject]
-        private void Construct(IInputManager inputManager, WeaponsConfig data, WeaponSlotData[] slotsData)
+        private void Construct(IInputManager inputManager, IWeaponsConfig data, WeaponSlotData[] slotsData)
         {
             _inputManager = inputManager;
 
@@ -77,6 +77,9 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
             OnWeaponChanged?.Invoke();
         }
 
-        private IWeaponSlot GetSlotByIndex(int weaponIndex) => _slotsByType.TryGetValue((WeaponType)weaponIndex, out var slot) ? slot : null;
+        private IWeaponSlot GetSlotByIndex(int weaponIndex)
+        {
+            return _slotsByType.GetValueOrDefault((WeaponType)weaponIndex);
+        }
     }
 }

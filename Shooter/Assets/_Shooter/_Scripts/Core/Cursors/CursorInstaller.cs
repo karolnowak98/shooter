@@ -1,0 +1,13 @@
+using Zenject;
+
+namespace GlassyCode.Shooter.Core.Cursors
+{
+    public class CursorInstaller : MonoInstaller
+    {
+        public override void InstallBindings()
+        {
+            Container.Bind(typeof(CursorController), typeof(ICursorController)).To<CursorController>()
+                .AsSingle().NonLazy();
+        }
+    }
+}

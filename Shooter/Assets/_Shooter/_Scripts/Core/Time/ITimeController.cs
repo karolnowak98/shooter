@@ -1,3 +1,5 @@
+using System;
+
 namespace GlassyCode.Shooter.Core.Time
 {
     public interface ITimeController
@@ -8,5 +10,11 @@ namespace GlassyCode.Shooter.Core.Time
         float RegularTime { get; }
         float FixedTime { get; }
         float UnscaledTime { get; }
+        bool IsPaused { get; }
+        event Action OnPaused;
+        event Action OnResumed;
+        void Pause();
+        void Resume();
+        void TogglePause();
     }
 }

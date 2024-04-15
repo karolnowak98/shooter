@@ -1,5 +1,5 @@
-﻿using GlassyCode.Shooter.Core.Particles;
-using UnityEngine;
+﻿using UnityEngine;
+using GlassyCode.Shooter.Core.Particles;
 
 namespace GlassyCode.Shooter.Game.Props.Logic
 {

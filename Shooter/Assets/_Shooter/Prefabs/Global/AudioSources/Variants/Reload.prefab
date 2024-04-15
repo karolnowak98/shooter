@@ -18,11 +18,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7094001293243438104, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: _volumeRanges.x
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -7094001293243438104, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: _volumeRanges.y
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3238937145809543026, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3628368135653068213, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: m_Volume
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3628368135653068213, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: m_Resource

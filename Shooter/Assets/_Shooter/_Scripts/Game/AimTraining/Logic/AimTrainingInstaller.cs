@@ -1,7 +1,6 @@
-using GlassyCode.Shooter.Game.AimTraining.Data;
-using GlassyCode.Shooter.Game.AimTraining.Logic.Interfaces;
 using UnityEngine;
 using Zenject;
+using GlassyCode.Shooter.Game.AimTraining.Data;
 
 namespace GlassyCode.Shooter.Game.AimTraining.Logic
 {

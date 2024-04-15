@@ -1,5 +1,5 @@
-using GlassyCode.Shooter.Core.Data;
 using UnityEngine;
+using GlassyCode.Shooter.Core.Data;
 
 namespace GlassyCode.Shooter.Game.AimTraining.Data
 {
@@ -7,19 +7,21 @@ namespace GlassyCode.Shooter.Game.AimTraining.Data
     public class AimTrainingConfig : Config, IAimTrainingConfig
     {
         //Might be better to use I2Loc for example
-        public const string FirstSergeantLine = "Welcome to the training, soldier. Your first mission is to hone your shooting skills. I'm your superior officer, and I'll be guiding you through this.";
-        public const string SecondSergeantLine = "You'll be firing at targets against the clock. Remember, precision and speed are paramount. Ready to prove your mettle, soldier?";
-        public const string SuccessSergeantLine = "Good job my friend!";
-        public const string TryAgainSergeantLine = "Keep going, you are better!";
         
-        public const string Agree = "Okay...";
-        public const string StartRound = "Keep going, you are better!";
-        public const string SuccessBtnText = "Good job my friend!";
         
-        [SerializeField] private TimerData _preparationTimer;
-        [SerializeField] private TimerData _roundTimer;
+        [Tooltip("Timer for the preparation phase.")]
+        [SerializeField]
+        private TimerData _preparationTimer;
+
+        [Tooltip("Timer for each round.")]
+        [SerializeField]
+        private TimerData _roundTimer;
+
+        [SerializeField] 
+        private RoundSuccessConditionsData _successConditionsDataData;
 
         public TimerData PreparationTimer => _preparationTimer;
         public TimerData RoundTimer => _roundTimer;
+        public RoundSuccessConditionsData SuccessConditionsDataData => _successConditionsDataData;
     }
 }

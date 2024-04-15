@@ -18,3 +18,10 @@ MonoBehaviour:
   _roundTimer:
     _countdownTime: 60
     _uiRefreshInterval: 0.1
+  _successConditionsDataData:
+    _hitsConditionData:
+      _counter: 75
+      _uiLabel: 
+    _accuracyConditionData:
+      _percentage: 90
+      _uiLabel: 

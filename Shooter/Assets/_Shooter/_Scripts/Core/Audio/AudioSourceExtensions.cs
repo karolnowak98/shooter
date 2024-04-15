@@ -1,7 +1,6 @@
-using GlassyCode.Shooter.Core.Audio.Data;
 using UnityEngine;
 
-namespace GlassyCode.Shooter.Core.Audio.Logic
+namespace GlassyCode.Shooter.Core.Audio
 {
     public static class AudioSourceExtensions
     {

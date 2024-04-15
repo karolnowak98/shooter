@@ -10,7 +10,7 @@ namespace GlassyCode.Shooter.Core.Applications.Logic
         
         public override void InstallBindings()
         {
-            Container.BindInstance(_applicationConfig);
+            Container.Bind<IApplicationConfig>().To<ApplicationConfig>().FromInstance(_applicationConfig).AsSingle();
             
             Container.Bind(typeof(ApplicationController), typeof(IApplicationController), typeof(IInitializable))
                 .To<ApplicationController>().AsSingle().NonLazy();

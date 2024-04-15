@@ -4,12 +4,14 @@ using GlassyCode.Shooter.Core.Data;
 namespace GlassyCode.Shooter.Game.Player.Data
 {
     [CreateAssetMenu(menuName = "Configs/Player Config", fileName = "Player Config")]
-    public class PlayerConfig : Config
+    public class PlayerConfig : Config, IPlayerConfig
     {
-        [SerializeField, Tooltip("Configuration data for the player's camera.")]
+        [Tooltip("Configuration data for the player's camera.")]
+        [SerializeField]
         private CameraData _cameraData;
 
-        [SerializeField, Tooltip("Configuration data for the player's movement.")]
+        [Tooltip("Configuration data for the player's movement.")]
+        [SerializeField]
         private MovementData _movementData;
 
         public CameraData CameraData => _cameraData;
