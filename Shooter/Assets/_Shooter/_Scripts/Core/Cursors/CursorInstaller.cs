@@ -2,7 +2,7 @@ using Zenject;
 
 namespace GlassyCode.Shooter.Core.Cursors
 {
-    public class CursorInstaller : MonoInstaller
+    public sealed class CursorInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {

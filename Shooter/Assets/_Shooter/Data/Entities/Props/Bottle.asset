@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Bottle
   m_EditorClassIdentifier: 
   _id: 5
+  _name: 3
   _materialType: 5
   _durability: 25

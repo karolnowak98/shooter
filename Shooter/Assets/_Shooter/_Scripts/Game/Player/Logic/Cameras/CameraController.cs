@@ -1,36 +1,30 @@
-﻿using GlassyCode.Shooter.Core.Cursors;
-using GlassyCode.Shooter.Game.Player.Data;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using Zenject;
+using GlassyCode.Shooter.Core.Cursors;
+using GlassyCode.Shooter.Game.Player.Data;
 
 namespace GlassyCode.Shooter.Game.Player.Logic.Cameras
 {
-    public class CameraController : ICameraController, IInitializable, ITickable
+    public sealed class CameraController : ICameraController
     {
-        private ICursorController _cursorController;
+        private readonly ICursorController _cursorController;
+        private readonly Transform _cameraHolder;
+        private readonly Transform _playerCameraPosition;
+        private readonly Transform _playerOrientation;
+        
         private CameraData _data;
-        private Transform _holder;
-        private Transform _playerCameraPosition;
-        private Transform _playerOrientation;
         private float _xRotation;
         private float _yRotation;
         private bool _isCameraUnlocked;
 
-        [Inject]
-        private void Construct(ICursorController cursorController, CameraData data, Transform transform, 
-            Transform playerCameraPosition, Transform playerOrientation)
+        public CameraController(ICursorController cursorController, Transform playerOrientation, 
+            Transform playerCameraPosition, Transform cameraHolder, CameraData data)
         {
             _cursorController = cursorController;
-            _data = data;
-            _holder = transform;
-            _playerCameraPosition = playerCameraPosition;
             _playerOrientation = playerOrientation;
-        }
-        
-        public void Initialize()
-        {
-            ResetCamera();
+            _playerCameraPosition = playerCameraPosition;
+            _cameraHolder = cameraHolder;
+            _data = data;
         }
         
         public void Tick()
@@ -53,16 +47,14 @@ namespace GlassyCode.Shooter.Game.Player.Logic.Cameras
             _isCameraUnlocked = true;
         }
 
-        public void ResetCamera()
+        public void ResetCamera(Vector3 rotation)
         {
-            var startingRotation = _data.StartingRotation;
-
-            _yRotation = startingRotation.y;
-            _xRotation = startingRotation.x;
+            _yRotation = rotation.y;
+            _xRotation = rotation.x;
             
             UpdateCameraTransform();
         }
-
+        
         private void CalculateRotation()
         {
             var mouseDelta = Mouse.current.delta.ReadValue();
@@ -76,9 +68,9 @@ namespace GlassyCode.Shooter.Game.Player.Logic.Cameras
 
         private void UpdateCameraTransform()
         {
-            _holder.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
+            _cameraHolder.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
             _playerOrientation.rotation = Quaternion.Euler(0, _yRotation, 0);
-            _holder.position = _playerCameraPosition.position;
+            _cameraHolder.position = _playerCameraPosition.position;
         }
     }
 }

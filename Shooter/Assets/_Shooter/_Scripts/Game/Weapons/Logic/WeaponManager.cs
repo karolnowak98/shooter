@@ -7,12 +7,16 @@ using GlassyCode.Shooter.Game.Weapons.Enums;
 
 namespace GlassyCode.Shooter.Game.Weapons.Logic
 {
-    public class WeaponManager : IWeaponManager, ITickable
+    public sealed class WeaponManager : IWeaponManager, ITickable, IDisposable
     {
         private readonly Dictionary<WeaponType, IWeaponSlot> _slotsByType = new();
         
         private IInputManager _inputManager;
         private IWeaponSlot _selectedSlot;
+        
+        private Action _changeWeaponAction1;
+        private Action _changeWeaponAction2;
+        private Action _changeWeaponAction3;
         
         public IWeapon WeaponInHand => _selectedSlot.Weapon;
         
@@ -39,17 +43,48 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
 
             _selectedSlot = _slotsByType[data.StartingSlot];
             _selectedSlot?.EquipWeapon();
-            
-            _inputManager.OnBtn1Pressed += () => ChangeWeapon(1);
-            _inputManager.OnBtn2Pressed += () => ChangeWeapon(2);
-            _inputManager.OnBtn3Pressed += () => ChangeWeapon(3);
-            _inputManager.OnScrollUp += PickNextWeapon;
-            _inputManager.OnScrollDown += PickPreviousWeapon;
+
+            _changeWeaponAction1 = () => ChangeWeapon(1);
+            _changeWeaponAction2 = () => ChangeWeapon(2);
+            _changeWeaponAction3 = () => ChangeWeapon(3);
+        }
+        
+        public void Dispose()
+        {
+            DisableWeaponSwapping();
         }
         
         public void Tick()
         {
             WeaponInHand.Tick();
+        }
+
+        public void EnableWeaponSwapping()
+        {
+            AddListeners();
+        }
+
+        public void DisableWeaponSwapping()
+        {
+            RemoveListeners();
+        }
+        
+        private void AddListeners()
+        {
+            _inputManager.OnBtn1Pressed += _changeWeaponAction1;
+            _inputManager.OnBtn2Pressed += _changeWeaponAction2;
+            _inputManager.OnBtn3Pressed += _changeWeaponAction3;
+            _inputManager.OnScrollUp += PickNextWeapon;
+            _inputManager.OnScrollDown += PickPreviousWeapon;
+        }
+
+        private void RemoveListeners()
+        {
+            _inputManager.OnBtn1Pressed -= _changeWeaponAction1;
+            _inputManager.OnBtn2Pressed -= _changeWeaponAction2;
+            _inputManager.OnBtn3Pressed -= _changeWeaponAction3;
+            _inputManager.OnScrollUp -= PickNextWeapon;
+            _inputManager.OnScrollDown -= PickPreviousWeapon;
         }
         
         private void PickNextWeapon()
@@ -79,7 +114,7 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
 
         private IWeaponSlot GetSlotByIndex(int weaponIndex)
         {
-            return _slotsByType.GetValueOrDefault((WeaponType)weaponIndex);
+            return _slotsByType.GetValueOrDefault((WeaponType) weaponIndex);
         }
     }
 }

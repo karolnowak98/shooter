@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Zenject;
 using GlassyCode.Shooter.Game.Weapons.Data;
-using GlassyCode.Shooter.Game.Weapons.Logic.Shooting;
 
 namespace GlassyCode.Shooter.Game.Weapons.Logic
 {
@@ -15,10 +15,7 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
             Container.Bind<IWeaponsConfig>().To<WeaponsConfig>().FromInstance(_config).AsSingle();
             
             Container.Bind(typeof(WeaponManager), typeof(IWeaponManager), 
-                typeof(ITickable)).To<WeaponManager>().AsSingle().WithArguments(_weaponSlots).NonLazy();
-            
-            Container.Bind(typeof(ShootingController), typeof(IShootingController), 
-                    typeof(ITickable)).To<ShootingController>().AsSingle();
+                typeof(ITickable), typeof(IDisposable)).To<WeaponManager>().AsSingle().WithArguments(_weaponSlots).NonLazy();
         }
     }
 }

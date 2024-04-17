@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Stone
   m_EditorClassIdentifier: 
   _id: 7
+  _name: 6
   _materialType: 2
   _durability: 250

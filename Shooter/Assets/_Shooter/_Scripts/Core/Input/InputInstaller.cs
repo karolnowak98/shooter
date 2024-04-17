@@ -2,7 +2,7 @@
 
 namespace GlassyCode.Shooter.Core.Input
 {
-    public class InputInstaller : MonoInstaller
+    public sealed class InputInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {

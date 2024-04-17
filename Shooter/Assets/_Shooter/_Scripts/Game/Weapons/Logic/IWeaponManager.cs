@@ -6,5 +6,7 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
     {
         IWeapon WeaponInHand { get; }
         event Action OnWeaponChanged;
+        void EnableWeaponSwapping();
+        void DisableWeaponSwapping();
     }
 }

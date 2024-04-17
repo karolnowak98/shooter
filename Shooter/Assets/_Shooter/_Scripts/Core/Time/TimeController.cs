@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GlassyCode.Shooter.Core.Time
 {
-    public class TimeController : MonoBehaviour, ITimeController
+    public sealed class TimeController : MonoBehaviour, ITimeController
     {
         public float DeltaTime => UnityEngine.Time.deltaTime;
         public float FixedDeltaTime => UnityEngine.Time.fixedDeltaTime; 

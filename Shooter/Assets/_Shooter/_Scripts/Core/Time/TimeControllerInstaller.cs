@@ -2,7 +2,7 @@ using Zenject;
 
 namespace GlassyCode.Shooter.Core.Time
 {
-    public class TimeControllerInstaller : MonoInstaller
+    public sealed class TimeControllerInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {

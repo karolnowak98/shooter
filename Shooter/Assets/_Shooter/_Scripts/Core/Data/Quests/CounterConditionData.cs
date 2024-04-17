@@ -9,10 +9,6 @@ namespace GlassyCode.Shooter.Core.Data.Quests
         [SerializeField, Min(0)] 
         private uint _counter;
         
-        [SerializeField]
-        private string _uiLabel;
-        
         public uint Counter => _counter;
-        public string UILabel => _uiLabel;
     }
 }

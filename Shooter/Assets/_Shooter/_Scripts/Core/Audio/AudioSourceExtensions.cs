@@ -16,5 +16,19 @@ namespace GlassyCode.Shooter.Core.Audio
             
             Object.Destroy(data.gameObject, audioSource.clip.length);
         }
+        
+        public static void Play(this AudioSourceData audioSourceData)
+        {
+            var parent = audioSourceData.transform;
+            var data = Object.Instantiate(audioSourceData, parent.position, parent.rotation);
+            var audioSource = data.AudioSource;
+            
+            audioSource.volume = Random.Range(data.VolumeRanges.x, data.VolumeRanges.y);
+            audioSource.pitch = Random.Range(data.PitchRanges.x, data.PitchRanges.y);
+            audioSource.spatialBlend = Random.Range(data.SpatialBlend.x, data.SpatialBlend.y);
+            audioSource.Play();
+            
+            Object.Destroy(data.gameObject, audioSource.clip.length);
+        }
     }
 }

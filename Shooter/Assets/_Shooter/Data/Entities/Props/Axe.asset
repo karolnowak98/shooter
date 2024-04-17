@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   _id: 6
+  _name: 4
   _materialType: 1
   _durability: 150

@@ -6,7 +6,7 @@ using Zenject;
 
 namespace GlassyCode.Shooter.Core.Input
 {
-    public class InputManager : IInputManager, IInitializable, IDisposable
+    public sealed class InputManager : IInputManager, IInitializable, IDisposable
     {
         private Controls _controls;
         

@@ -1,47 +1,37 @@
-﻿using System;
+﻿using UnityEngine;
 using GlassyCode.Shooter.Core.Input;
 using GlassyCode.Shooter.Game.Player.Data;
-using UnityEngine;
-using Zenject;
 
 namespace GlassyCode.Shooter.Game.Player.Logic.Movement
 {
-    public class MovementController : IMovementController, IInitializable, ITickable, IFixedTickable, IDisposable
+    public sealed class MovementController : IMovementController
     {
-        private IInputManager _inputManager;
+        private readonly IInputManager _inputManager;
+        private readonly Rigidbody _rb;
+        private readonly Transform _orientation;
+        private readonly Transform _player;
+        
         private MovementData _movementData;
-        private Rigidbody _rb;
-        private Transform _orientation;
         private Vector3 _moveDirection;
         private bool _isGrounded;
         private bool _canMove;
         private bool _canJump;
         private float _nextJumpTime;
 
-        public Transform Player { get; private set; }
-
-        [Inject]
-        private void Construct(IInputManager inputManager, MovementData data, Transform orientation, Transform playerTransform, Rigidbody rb)
+        public MovementController(IInputManager inputManager, Transform player,  Rigidbody rb, Transform orientation, MovementData data)
         {
             _inputManager = inputManager;
-            _movementData = data;
-            _orientation = orientation;
-            Player = playerTransform;
+            _player = player;
             _rb = rb;
-
-            _inputManager.OnSpacePressed += Jump;
+            _orientation = orientation;
+            _movementData = data;
         }
         
         public void Dispose()
         {
-            _inputManager.OnSpacePressed -= Jump;
+            DisableMovement();
         }
         
-        public void Initialize()
-        {
-            _rb.freezeRotation = true;
-        }
-
         public void Tick()
         {
             if (!_canMove) return;
@@ -54,16 +44,20 @@ namespace GlassyCode.Shooter.Game.Player.Logic.Movement
 
         public void FixedTick()
         {
+            if (!_canMove) return;
+            
             AddMoveForce();
         }
 
         public void EnableMovement()
         {
+            _inputManager.OnSpacePressed += Jump;
             _canMove = true;
         }
 
         public void DisableMovement()
         {
+            _inputManager.OnSpacePressed -= Jump;
             _canMove = false;
         }
 
@@ -74,7 +68,7 @@ namespace GlassyCode.Shooter.Game.Player.Logic.Movement
 
         private void AddDragForce()
         {
-            _isGrounded = Physics.Raycast(_orientation.position, Vector3.down, _movementData.PlayerHeight * 0.5f, _movementData.GroundMask);
+            _isGrounded = Physics.Raycast(_orientation.position, Vector3.down, _movementData.PlayerHeight * 0.51f, _movementData.GroundMask);
             _rb.drag = _isGrounded ? _movementData.DragForce : 0;
         }
 
@@ -116,7 +110,7 @@ namespace GlassyCode.Shooter.Game.Player.Logic.Movement
                 velocity = new Vector3(velocity.x, 0f, velocity.z);
                 
                 _rb.velocity = velocity;
-                _rb.AddForce(Player.up * _movementData.JumpForce, ForceMode.Impulse);
+                _rb.AddForce(_player.up * _movementData.JumpForce, ForceMode.Impulse);
                 _nextJumpTime = Time.time + _movementData.JumpCooldown;
             }
         }

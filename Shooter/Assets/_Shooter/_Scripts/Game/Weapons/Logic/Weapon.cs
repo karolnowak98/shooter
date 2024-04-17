@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using GlassyCode.Shooter.Core.Audio;
 using GlassyCode.Shooter.Game.Weapons.Data;
 
 namespace GlassyCode.Shooter.Game.Weapons.Logic
@@ -13,6 +14,8 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
         public int TotalAmmo { get; private set; }
         public int AmmoInMagazine { get; set; }
         public bool IsReloading { get; set; }
+        public bool CanReload => AmmoInMagazine < WeaponEntity.NumberOfBulletsInMagazine && !IsReloading 
+            && (TotalAmmo > 0 || AmmoInMagazine <= 0);
 
         public event Action OnReloadStart;
         public event Action<float> OnReloadProgressChanged;
@@ -44,11 +47,12 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
 
         public void StartReload()
         {
-            if (!CanReload()) return;
+            if (!CanReload) return;
             
             IsReloading = true;
             _reloadStartTime = Time.time;
 
+            WeaponEntity.ReloadSound.Play();
             OnReloadStart?.Invoke();
         }
 
@@ -67,9 +71,5 @@ namespace GlassyCode.Shooter.Game.Weapons.Logic
 
             OnReloadProgressChanged?.Invoke(1);
         }
-
-        private bool CanReload() => AmmoInMagazine < WeaponEntity.NumberOfBulletsInMagazine 
-                && !IsReloading 
-                && (TotalAmmo > 0 || AmmoInMagazine <= 0);
     }
 }

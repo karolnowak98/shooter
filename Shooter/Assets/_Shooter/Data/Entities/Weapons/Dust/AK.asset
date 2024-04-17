@@ -22,9 +22,9 @@ MonoBehaviour:
   _ammoIcon: {fileID: 21300004, guid: 5163ae49a0de665458bba61cd20c99b1, type: 3}
   _damage: 20
   _destroyMaterials: 0000000004000000
-  _shootCooldown: 0.08
+  _shootCooldown: 0.16
   _range: 50
   _isRapidFire: 1
-  _numberOfMagazines: 4
-  _numberOfBulletsInMagazine: 30
+  _numberOfMagazines: 2
+  _numberOfBulletsInMagazine: 25
   _reloadTime: 1.5

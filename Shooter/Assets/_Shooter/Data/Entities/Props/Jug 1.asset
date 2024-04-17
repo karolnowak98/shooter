@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Jug 1
   m_EditorClassIdentifier: 
   _id: 2
+  _name: 1
   _materialType: 4
   _durability: 25

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Barrel
   m_EditorClassIdentifier: 
   _id: 3
+  _name: 2
   _materialType: 0
   _durability: 150

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3cf7adb25ac47d0a64b77b5edd05d3e, type: 3}
+  m_Name: Player Config
+  m_EditorClassIdentifier: 
+  _playerData:
+    _startingPosition: {x: 0, y: 1.1, z: 15.5}
+    _startingRotation: {x: 0, y: 180, z: 0}
+  _cameraData:
+    _xSens: 30
+    _ySens: 30
+    _minYAngle: -90
+    _maxYAngle: 90
+  _movementData:
+    _moveSpeed: 50
+    _maxMoveSpeed: 5
+    _playerHeight: 2
+    _jumpForce: 5
+    _jumpCooldown: 0.5
+    _airMultiplier: 0.4
+    _dragForce: 2
+    _groundMask:
+      serializedVersion: 2
+      m_Bits: 1024

@@ -4,7 +4,7 @@ using Zenject;
 
 namespace GlassyCode.Shooter.Core.Applications.Logic
 {
-    public class ApplicationInstaller : MonoInstaller
+    public sealed class ApplicationInstaller : MonoInstaller
     {
         [SerializeField] private ApplicationConfig _applicationConfig;
         

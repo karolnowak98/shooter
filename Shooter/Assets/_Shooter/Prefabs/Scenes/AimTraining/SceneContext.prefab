@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3664342299192942370}
   - component: {fileID: 6916281163233138590}
   - component: {fileID: 997992390717994524}
+  - component: {fileID: 1596197029180313331}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
+  - {fileID: 1596197029180313331}
   - {fileID: 3664342299192942370}
   - {fileID: 6916281163233138590}
   - {fileID: 997992390717994524}
@@ -85,7 +87,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   _playerRb: {fileID: 0}
   _playerOrientation: {fileID: 0}
-  _playerCameraPos: {fileID: 0}
+  _playerCameraPosition: {fileID: 0}
   _playerCamHolder: {fileID: 0}
 --- !u!114 &6916281163233138590
 MonoBehaviour:
@@ -118,3 +120,15 @@ MonoBehaviour:
   _config: {fileID: 11400000, guid: 9c5a88c3ce9566648ab74aa50f795101, type: 2}
   _targetsSpawnArea: {fileID: 0}
   _targetPrefab: {fileID: 6672326855432416602, guid: 6076336a0117a9a41b6427a368410068, type: 3}
+--- !u!114 &1596197029180313331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345032691549472869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a46f5eaa0042079edcf35b4c3d2936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

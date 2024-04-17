@@ -15,14 +15,16 @@ MonoBehaviour:
   _id: 2
   _type: 2
   _prefab: {fileID: 5248069527505826781, guid: 11e026101abcbbe44836bddf9887d02f, type: 3}
+  _shotSound: {fileID: 326483554722132880, guid: 6a76a373fd5e910408bfc3b9697c9304, type: 3}
+  _reloadSound: {fileID: 326483554722132880, guid: b16b1bfbc2d07f545a48a775f64049a0, type: 3}
+  _bulletImpactParticleData: {fileID: 2440869931762704884, guid: caa8bd0d2623acf4d915f16e0ab71218, type: 3}
   _icon: {fileID: 21300012, guid: 6674e8c43c63e4f4184cbd009379498d, type: 3}
   _ammoIcon: {fileID: 21300018, guid: 5163ae49a0de665458bba61cd20c99b1, type: 3}
-  _bulletImpactParticle: {fileID: 19800002, guid: caa8bd0d2623acf4d915f16e0ab71218, type: 3}
   _damage: 40
   _destroyMaterials: 010000000200000003000000
   _shootCooldown: 1
   _range: 5
   _isRapidFire: 0
   _numberOfMagazines: 2
-  _numberOfBulletsInMagazine: 6
+  _numberOfBulletsInMagazine: 5
   _reloadTime: 2

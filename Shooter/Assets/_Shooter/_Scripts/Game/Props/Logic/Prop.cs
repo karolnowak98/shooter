@@ -11,6 +11,7 @@ namespace GlassyCode.Shooter.Game.Props.Logic
         
         private int _currentDurability;
 
+        public PropName Name => _data.Name;
         public PropMaterialType MaterialType => _data.MaterialType;
 
         public event Action OnDestroy;
@@ -20,7 +21,7 @@ namespace GlassyCode.Shooter.Game.Props.Logic
             _currentDurability = _data.Durability;
         }
         
-        public void TakeDamage(int damage)
+        public bool TakeDamage(int damage) 
         {
             _currentDurability -= damage;
 
@@ -28,7 +29,10 @@ namespace GlassyCode.Shooter.Game.Props.Logic
             {
                 OnDestroy?.Invoke();
                 Destroy(gameObject);
+                return true;
             }
+
+            return false;
         }
     }
 }

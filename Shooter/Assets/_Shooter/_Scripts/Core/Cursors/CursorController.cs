@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GlassyCode.Shooter.Core.Cursors
 {
-    public class CursorController : ICursorController
+    public sealed class CursorController : ICursorController
     {
         public void UnlockCursor()
         {

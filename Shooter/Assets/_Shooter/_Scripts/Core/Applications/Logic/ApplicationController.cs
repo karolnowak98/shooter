@@ -1,10 +1,10 @@
-using GlassyCode.Shooter.Core.Applications.Data;
 using UnityEngine;
 using Zenject;
+using GlassyCode.Shooter.Core.Applications.Data;
 
 namespace GlassyCode.Shooter.Core.Applications.Logic
 {
-    public class ApplicationController : IApplicationController, IInitializable
+    public sealed class ApplicationController : IApplicationController, IInitializable
     {
         private IApplicationConfig _applicationConfig;
 
@@ -17,6 +17,12 @@ namespace GlassyCode.Shooter.Core.Applications.Logic
         public void Initialize()
         {
             Application.targetFrameRate = _applicationConfig.TargetFps;
+        }
+
+        public void QuitApplication()
+        {
+            Debug.Log("Won the game");
+            Application.Quit();
         }
     }
 }

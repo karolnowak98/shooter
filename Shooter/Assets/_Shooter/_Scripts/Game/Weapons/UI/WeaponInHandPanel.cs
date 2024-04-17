@@ -3,9 +3,10 @@ using UnityEngine.UI;
 using TMPro;
 using Zenject;
 using GlassyCode.Shooter.Core.UI;
+using GlassyCode.Shooter.Game.Player.Logic;
+using GlassyCode.Shooter.Game.Player.Logic.Shooting;
 using GlassyCode.Shooter.Game.Props.Logic;
 using GlassyCode.Shooter.Game.Weapons.Logic;
-using GlassyCode.Shooter.Game.Weapons.Logic.Shooting;
 
 namespace GlassyCode.Shooter.Game.Weapons.UI
 {
@@ -22,10 +23,10 @@ namespace GlassyCode.Shooter.Game.Weapons.UI
         private IShootingController _shootingController;
 
         [Inject]
-        private void Construct(IWeaponManager weaponManager, IShootingController shootingController)
+        private void Construct(IWeaponManager weaponManager, IPlayerController playerController)
         {
             _weaponManager = weaponManager;
-            _shootingController = shootingController;
+            _shootingController = playerController.ShootingController;
 
             _weaponManager.OnWeaponChanged += UpdateWeaponPanel;
             _shootingController.OnShoot += UpdateAmmo;

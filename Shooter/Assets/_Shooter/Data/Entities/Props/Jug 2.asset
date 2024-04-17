@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Jug 2
   m_EditorClassIdentifier: 
   _id: 1
+  _name: 1
   _materialType: 4
   _durability: 15
-  _useImpactParticle: 0
-  _impactParticle: {fileID: 0}
