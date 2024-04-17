@@ -26,11 +26,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7094001293243438104, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: _volumeRanges.x
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -7094001293243438104, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: _volumeRanges.y
-      value: 0.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3238937145809543026, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -98,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7522811856842214149, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: m_Name
-      value: TargetDestroyed
+      value: JugDestroyed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

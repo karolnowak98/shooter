@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7094001293243438104, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: _pitchRanges.x
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -7094001293243438104, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: _pitchRanges.y
-      value: 1.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7094001293243438104, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: _spatialBlend.x
@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7094001293243438104, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: _volumeRanges.x
-      value: 0.5
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: -7094001293243438104, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: _volumeRanges.y
@@ -83,11 +83,11 @@ PrefabInstance:
     - target: {fileID: 3628368135653068213, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: m_Resource
       value: 
-      objectReference: {fileID: 8300000, guid: 30b59651474a59a48834a97ff43d7da2, type: 3}
+      objectReference: {fileID: 8300000, guid: 869cb743eef0b264b9b9876e8af64143, type: 3}
     - target: {fileID: 3628368135653068213, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 30b59651474a59a48834a97ff43d7da2, type: 3}
+      objectReference: {fileID: 8300000, guid: 869cb743eef0b264b9b9876e8af64143, type: 3}
     - target: {fileID: 3628368135653068213, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: m_PlayOnAwake
       value: 1
@@ -98,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7522811856842214149, guid: ea179bd5ab3d3f846b4d671100f355d4, type: 3}
       propertyPath: m_Name
-      value: TargetDestroyed
+      value: BarrelDestroyed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -140,8 +140,11 @@ namespace GlassyCode.Shooter.Game.Player.Logic.Shooting
             
             if (weaponInHand.AmmoInMagazine < data.NumberOfBulletsInMagazine)
             {
+                if (weaponInHand.AmmoInMagazine <= 0 && weaponInHand.TotalAmmo <= 0)
+                {
+                    return;
+                }
                 weaponInHand.StartReload();
-                
             }
 
             StopShooting();

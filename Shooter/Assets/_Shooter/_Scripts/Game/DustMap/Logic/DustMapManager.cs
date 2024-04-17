@@ -86,6 +86,7 @@ namespace GlassyCode.Shooter.Game.DustMap.Logic
             if (!_propsDestroyed.ContainsKey(propName)) return;
             
             var destroyed = ++_propsDestroyed[propName];
+            
             OnPropDestroyed?.Invoke(propName, destroyed);
 
             if (AreSuccessConditionsMet())

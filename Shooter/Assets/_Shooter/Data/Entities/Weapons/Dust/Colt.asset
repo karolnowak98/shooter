@@ -25,6 +25,6 @@ MonoBehaviour:
   _shootCooldown: 0.5
   _range: 10
   _isRapidFire: 0
-  _numberOfMagazines: 2
+  _numberOfMagazines: 1
   _numberOfBulletsInMagazine: 9
   _reloadTime: 1.75

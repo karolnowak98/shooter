@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5736142823580642371}
   - component: {fileID: -7560579636613428150}
   - component: {fileID: -61495412024672334}
+  - component: {fileID: 2342562143061763552}
   m_Layer: 11
   m_Name: Jug_01
   m_TagString: Untagged
@@ -30,9 +31,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3956864845004347026}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.83, y: 0.83, z: 0.83}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -163,3 +164,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particle: {fileID: 4364220880952756295, guid: 8fff33a905fad6c4496eecf24dcfe9e9, type: 3}
+--- !u!114 &2342562143061763552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3956864845004347026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4cf28416d34a149969f38d530baa5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSourceData: {fileID: 326483554722132880, guid: 5652e21d5375d8d439dd81d2ef91d8c9, type: 3}

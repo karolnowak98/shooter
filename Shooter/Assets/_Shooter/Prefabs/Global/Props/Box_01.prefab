@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7537141244097733368}
   - component: {fileID: 7894564597595955279}
   - component: {fileID: 3192932835506765363}
+  - component: {fileID: 4904145654521433330}
   m_Layer: 11
   m_Name: Box_01
   m_TagString: Untagged
@@ -163,3 +164,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particle: {fileID: 1638911144678155838, guid: 1ffd2532f2d192a40831e6af062f156f, type: 3}
+--- !u!114 &4904145654521433330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5284406570180094706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4cf28416d34a149969f38d530baa5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSourceData: {fileID: 326483554722132880, guid: 405b91488c248484a9e7bfe61f6d5a60, type: 3}
