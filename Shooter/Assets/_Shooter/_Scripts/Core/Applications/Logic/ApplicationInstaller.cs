@@ -1,6 +1,6 @@
-using GlassyCode.Shooter.Core.Applications.Data;
 using UnityEngine;
 using Zenject;
+using GlassyCode.Shooter.Core.Applications.Data;
 
 namespace GlassyCode.Shooter.Core.Applications.Logic
 {

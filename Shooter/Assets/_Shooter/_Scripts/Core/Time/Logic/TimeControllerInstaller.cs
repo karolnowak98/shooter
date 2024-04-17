@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace GlassyCode.Shooter.Core.Time
+namespace GlassyCode.Shooter.Core.Time.Logic
 {
     public sealed class TimeControllerInstaller : MonoInstaller
     {

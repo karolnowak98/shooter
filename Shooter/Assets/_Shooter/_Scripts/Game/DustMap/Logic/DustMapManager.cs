@@ -1,7 +1,7 @@
 using System;
 using Zenject;
 using System.Collections.Generic;
-using GlassyCode.Shooter.Core.Time;
+using GlassyCode.Shooter.Core.Time.Logic;
 using GlassyCode.Shooter.Game.AimMap.Enums;
 using GlassyCode.Shooter.Game.DustMap.Data;
 using GlassyCode.Shooter.Game.Player.Logic;

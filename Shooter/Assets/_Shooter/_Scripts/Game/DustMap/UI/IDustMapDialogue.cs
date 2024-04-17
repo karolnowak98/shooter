@@ -1,4 +1,4 @@
-using GlassyCode.Shooter.Core.UI;
+using GlassyCode.Shooter.Core.UI.Logic;
 
 namespace GlassyCode.Shooter.Game.DustMap.UI
 {

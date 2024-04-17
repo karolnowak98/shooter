@@ -1,5 +1,5 @@
 using System;
-using GlassyCode.Shooter.Core.Time;
+using GlassyCode.Shooter.Core.Time.Logic;
 using GlassyCode.Shooter.Game.AimMap.Enums;
 using GlassyCode.Shooter.Game.Props.Enums;
 

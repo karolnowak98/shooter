@@ -1,6 +1,6 @@
 using System;
 
-namespace GlassyCode.Shooter.Core.Time
+namespace GlassyCode.Shooter.Core.Time.Logic
 {
     public interface ITimeController
     {

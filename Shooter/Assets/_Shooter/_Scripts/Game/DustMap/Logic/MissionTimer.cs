@@ -1,4 +1,4 @@
-using GlassyCode.Shooter.Core.Time;
+using GlassyCode.Shooter.Core.Time.Logic;
 
 namespace GlassyCode.Shooter.Game.DustMap.Logic
 {

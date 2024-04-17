@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Zenject;
@@ -6,6 +7,7 @@ using GlassyCode.Shooter.Core.UI;
 using GlassyCode.Shooter.Game.Player.Logic;
 using GlassyCode.Shooter.Game.Player.Logic.Shooting;
 using GlassyCode.Shooter.Game.Props.Logic;
+using GlassyCode.Shooter.Game.Weapons.Enums;
 using GlassyCode.Shooter.Game.Weapons.Logic;
 
 namespace GlassyCode.Shooter.Game.Weapons.UI
@@ -17,6 +19,7 @@ namespace GlassyCode.Shooter.Game.Weapons.UI
         [SerializeField] private TextMeshProUGUI _destroyMaterialTmp;
         [SerializeField] private Image _ammoIcon;
         [SerializeField] private Image _weaponIcon;
+        [SerializeField] private Image _pistolIcon;
         [SerializeField] private Slider _reloadSlider;
 
         private IWeaponManager _weaponManager;
@@ -51,6 +54,24 @@ namespace GlassyCode.Shooter.Game.Weapons.UI
             _destroyMaterialTmp.text = "Destroy: " + string.Join(", ", data.DestroyMaterials);
             _ammoIcon.sprite = data.AmmoIcon;
             _weaponIcon.sprite = data.Icon;
+
+            //TODO simplify use one icon
+            switch (data.Type)
+            {
+                case WeaponType.Rifle:
+                case WeaponType.Shotgun:
+                    _weaponIcon.sprite = data.Icon;
+                    _weaponIcon.gameObject.SetActive(true);
+                    _pistolIcon.gameObject.SetActive(false);
+                    break;
+                case WeaponType.Pistol:
+                    _pistolIcon.sprite = data.Icon;
+                    _weaponIcon.gameObject.SetActive(false);
+                    _pistolIcon.gameObject.SetActive(true);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
             
             UpdateAmmo();
             UpdateReloadSliderVisibility(false);

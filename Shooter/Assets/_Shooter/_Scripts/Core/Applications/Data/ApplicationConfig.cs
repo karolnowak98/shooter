@@ -1,5 +1,5 @@
-using GlassyCode.Shooter.Core.Data;
 using UnityEngine;
+using GlassyCode.Shooter.Core.Data;
 
 namespace GlassyCode.Shooter.Core.Applications.Data
 {

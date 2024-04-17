@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using ModestTree;
 
-namespace GlassyCode.Shooter.Core.UI
+namespace GlassyCode.Shooter.Core.UI.Logic
 {
     public abstract class Dialogue
     {

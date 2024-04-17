@@ -1,4 +1,4 @@
-namespace GlassyCode.Shooter.Core.UI
+namespace GlassyCode.Shooter.Core.UI.Logic
 {
     public struct DialogueLine
     {

@@ -1,15 +1,14 @@
-using GlassyCode.Shooter.Core.UI;
+using UnityEngine;
+using TMPro;
+using Zenject;
+using GlassyCode.Shooter.Core.Time.UI;
 using GlassyCode.Shooter.Game.AimMap.Enums;
 using GlassyCode.Shooter.Game.AimMap.Logic;
-using TMPro;
-using UnityEngine;
-using Zenject;
 
 namespace GlassyCode.Shooter.Game.AimMap.UI
 {
-    public class RoundPanel : Panel
+    public class RoundTimerUI : TimerUI
     {
-        [SerializeField] private TextMeshProUGUI _timeLeftTmp;
         [SerializeField] private TextMeshProUGUI _hitsTmp;
         [SerializeField] private TextMeshProUGUI _missesTmp;
         
@@ -45,13 +44,8 @@ namespace GlassyCode.Shooter.Game.AimMap.UI
         {
             _hitsTmp.text = "0";
             _missesTmp.text = "0";
-            _timeLeftTmp.text = $"{remainingTime:N1}";
+            SetTimeLeftTmp(remainingTime);
             Show();
-        }
-
-        private void SetTimeLeftTmp(float seconds)
-        {
-            _timeLeftTmp.text = $"{seconds:N1}";
         }
 
         private void SetHitsTmp(uint hits)

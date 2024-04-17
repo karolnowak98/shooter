@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace GlassyCode.Shooter.Core.Time
+namespace GlassyCode.Shooter.Core.Time.Logic
 {
     public sealed class TimeController : MonoBehaviour, ITimeController
     {

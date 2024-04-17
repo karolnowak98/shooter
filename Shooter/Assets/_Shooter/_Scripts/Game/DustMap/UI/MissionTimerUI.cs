@@ -1,16 +1,12 @@
-using UnityEngine;
-using TMPro;
+using GlassyCode.Shooter.Core.Time.UI;
 using Zenject;
-using GlassyCode.Shooter.Core.UI;
 using GlassyCode.Shooter.Game.AimMap.Enums;
 using GlassyCode.Shooter.Game.DustMap.Logic;
 
 namespace GlassyCode.Shooter.Game.DustMap.UI
 {
-    public class MissionTimerUI : Panel
+    public class MissionTimerUI : TimerUI
     {
-        [SerializeField] private TextMeshProUGUI _timeLeftTmp;
-        
         private IDustMapManager _aimMapManager;
         
         [Inject]
@@ -37,13 +33,8 @@ namespace GlassyCode.Shooter.Game.DustMap.UI
 
         private void ResetPanel(float remainingTime)
         {
-            _timeLeftTmp.text = $"{remainingTime:N1}";
+            TimeLeftTmp.text = $"{remainingTime:N1}";
             Show();
-        }
-
-        private void SetTimeLeftTmp(float seconds)
-        {
-            _timeLeftTmp.text = $"{seconds:N1}";
         }
     }
 }

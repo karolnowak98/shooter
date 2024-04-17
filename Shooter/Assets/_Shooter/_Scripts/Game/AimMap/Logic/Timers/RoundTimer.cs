@@ -1,4 +1,5 @@
 using GlassyCode.Shooter.Core.Time;
+using GlassyCode.Shooter.Core.Time.Logic;
 using GlassyCode.Shooter.Game.Player.Logic.Cameras;
 
 namespace GlassyCode.Shooter.Game.AimMap.Logic.Timers

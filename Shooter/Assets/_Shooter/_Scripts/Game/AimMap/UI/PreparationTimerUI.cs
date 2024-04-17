@@ -1,15 +1,11 @@
-using GlassyCode.Shooter.Core.UI;
-using GlassyCode.Shooter.Game.AimMap.Logic;
-using TMPro;
-using UnityEngine;
 using Zenject;
+using GlassyCode.Shooter.Core.Time.UI;
+using GlassyCode.Shooter.Game.AimMap.Logic;
 
 namespace GlassyCode.Shooter.Game.AimMap.UI
 {
-    public class PreparationPanel : Panel
+    public class PreparationTimerUI : TimerUI
     {
-        [SerializeField] private TextMeshProUGUI _countingDownTmp;
-
         private IAimMapManager _aimMapManager;
         
         [Inject]
@@ -17,27 +13,22 @@ namespace GlassyCode.Shooter.Game.AimMap.UI
         {
             _aimMapManager = aimMapManager;
 
-            _aimMapManager.PreparationTimer.OnUpdateUI += SetCountingDownTmp;
+            _aimMapManager.PreparationTimer.OnUpdateUI += SetTimeLeftTmp;
             _aimMapManager.PreparationTimer.OnTimerStarted += ResetPanel;
             _aimMapManager.OnRoundPrepared += Hide;
         }
 
         private void OnDestroy()
         {
-            _aimMapManager.PreparationTimer.OnUpdateUI -= SetCountingDownTmp;
+            _aimMapManager.PreparationTimer.OnUpdateUI -= SetTimeLeftTmp;
             _aimMapManager.PreparationTimer.OnTimerStarted -= ResetPanel;
             _aimMapManager.OnRoundPrepared -= Hide;
         }
 
         private void ResetPanel(float remainingSeconds)
         {
-            _countingDownTmp.text = $"{remainingSeconds:N0}";
+            SetTimeLeftTmp(remainingSeconds);
             Show();
-        }
-        
-        private void SetCountingDownTmp(float seconds)
-        {
-            _countingDownTmp.text = $"{seconds:N0}";
         }
     }
 }
