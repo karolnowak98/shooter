@@ -1,6 +1,6 @@
 using System;
-using GlassyCode.Shooter.Core.Data.Quests;
 using UnityEngine;
+using GlassyCode.Shooter.Core.Data.Quests;
 
 namespace GlassyCode.Shooter.Game.AimMap.Data
 {

@@ -10,10 +10,6 @@ namespace GlassyCode.Shooter.Core.Data.Quests
         [SerializeField, Range(0, 100)]
         private float _percentage;
         
-        [SerializeField]
-        private string _uiLabel;
-        
         public float Percentage => _percentage;
-        public string UILabel => _uiLabel;
     }
 }

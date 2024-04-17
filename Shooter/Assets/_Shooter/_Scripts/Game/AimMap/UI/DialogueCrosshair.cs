@@ -1,11 +1,11 @@
+using Zenject;
 using GlassyCode.Shooter.Core.UI;
 using GlassyCode.Shooter.Game.AimMap.Enums;
 using GlassyCode.Shooter.Game.AimMap.Logic;
-using Zenject;
 
 namespace GlassyCode.Shooter.Game.AimMap.UI
 {
-    public class DialogueCrosshair : Panel
+    public class DialogueCrosshair : Crosshair
     {
         private IAimMapManager _aimMapManager;
         

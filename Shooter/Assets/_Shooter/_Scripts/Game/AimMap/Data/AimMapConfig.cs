@@ -1,14 +1,11 @@
-using GlassyCode.Shooter.Core.Data;
 using UnityEngine;
+using GlassyCode.Shooter.Core.Data;
 
 namespace GlassyCode.Shooter.Game.AimMap.Data
 {
-    [CreateAssetMenu(menuName = "Configs/Aim Training Config", fileName = "Aim Training Config")]
+    [CreateAssetMenu(menuName = "Configs/Aim Map Config", fileName = "Aim Map Config")]
     public class AimMapConfig : Config, IAimMapConfig
     {
-        //Might be better to use I2Loc for example
-        
-        
         [Tooltip("Timer for the preparation phase.")]
         [SerializeField]
         private TimerData _preparationTimer;

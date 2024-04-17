@@ -1,8 +1,8 @@
 ﻿using System;
-using GlassyCode.Shooter.Game.Input.Logic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
+using GlassyCode.Shooter.Game.Input.Logic;
 
 namespace GlassyCode.Shooter.Core.Input
 {

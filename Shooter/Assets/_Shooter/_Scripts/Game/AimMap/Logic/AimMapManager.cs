@@ -1,12 +1,12 @@
 using System;
+using UnityEngine;
+using Zenject;
 using GlassyCode.Shooter.Core.Time.Logic;
 using GlassyCode.Shooter.Game.AimMap.Data;
 using GlassyCode.Shooter.Game.AimMap.Enums;
 using GlassyCode.Shooter.Game.AimMap.Logic.Targets;
 using GlassyCode.Shooter.Game.AimMap.Logic.Timers;
 using GlassyCode.Shooter.Game.Player.Logic;
-using UnityEngine;
-using Zenject;
 
 namespace GlassyCode.Shooter.Game.AimMap.Logic
 {

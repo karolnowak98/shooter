@@ -13,8 +13,9 @@ namespace GlassyCode.Shooter.Game.Player.Logic
 {
     public sealed class PlayerController : IPlayerController, ITickable, IFixedTickable, IDisposable
     {
-        public Transform Player { get; private set; }
-        public PlayerData Data { get; private set; }
+        private Transform _player;
+        private PlayerData _data;
+        
         public IMovementController MovementController { get; private set; }
         public ICameraController CameraController { get; private set; }
         public IShootingController ShootingController { get; private set; }
@@ -23,8 +24,8 @@ namespace GlassyCode.Shooter.Game.Player.Logic
         private void Construct(IInputManager inputManager, ICursorController cursorController, IWeaponManager weaponManager,
             IPlayerConfig config, Transform player, Rigidbody rb, Transform orientation, Transform playerCameraPosition, Transform cameraHolder)
         {
-            Player = player;
-            Data = config.PlayerData;
+            _player = player;
+            _data = config.PlayerData;
             
             MovementController = new MovementController(inputManager, player, rb, orientation, config.MovementData);
             CameraController = new CameraController(cursorController, orientation, playerCameraPosition, cameraHolder, config.CameraData);
@@ -64,9 +65,9 @@ namespace GlassyCode.Shooter.Game.Player.Logic
 
         public void Reset()
         {
-            Player.position = Data.StartingPosition;
-            Player.rotation = Quaternion.Euler(Data.StartingRotation);
-            CameraController.ResetCamera( Data.StartingRotation);
+            _player.position = _data.StartingPosition;
+            _player.rotation = Quaternion.Euler(_data.StartingRotation);
+            CameraController.ResetCamera( _data.StartingRotation);
         }
     }
 }

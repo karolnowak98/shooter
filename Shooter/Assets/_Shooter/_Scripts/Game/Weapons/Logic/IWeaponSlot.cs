@@ -1,5 +1,5 @@
-﻿using GlassyCode.Shooter.Game.Weapons.Enums;
-using UnityEngine;
+﻿using UnityEngine;
+using GlassyCode.Shooter.Game.Weapons.Enums;
 
 namespace GlassyCode.Shooter.Game.Weapons.Logic
 {

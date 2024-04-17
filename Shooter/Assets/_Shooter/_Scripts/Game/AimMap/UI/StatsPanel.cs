@@ -1,10 +1,10 @@
+using UnityEngine;
+using TMPro;
+using Zenject;
 using GlassyCode.Shooter.Core.UI;
 using GlassyCode.Shooter.Game.AimMap.Enums;
 using GlassyCode.Shooter.Game.AimMap.Logic;
 using GlassyCode.Shooter.Game.AimMap.Logic.Targets;
-using TMPro;
-using UnityEngine;
-using Zenject;
 
 namespace GlassyCode.Shooter.Game.AimMap.UI
 {
@@ -27,15 +27,15 @@ namespace GlassyCode.Shooter.Game.AimMap.UI
             _aimMapManager.PreparationTimer.OnTimerStarted += Hide;
         }
 
-        private void Hide(float obj)
-        {
-            Hide();
-        }
-
         private void OnDestroy()
         {
             _aimMapManager.OnRoundFinished -= ShowPanel;
             _aimMapManager.PreparationTimer.OnTimerStarted -= Hide;
+        }
+        
+        private void Hide(float obj)
+        {
+            Hide();
         }
 
         private void ShowPanel(RoundResult _)

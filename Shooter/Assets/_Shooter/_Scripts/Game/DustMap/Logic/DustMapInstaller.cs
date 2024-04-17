@@ -1,6 +1,6 @@
-using GlassyCode.Shooter.Game.DustMap.Data;
 using UnityEngine;
 using Zenject;
+using GlassyCode.Shooter.Game.DustMap.Data;
 
 namespace GlassyCode.Shooter.Game.DustMap.Logic
 {

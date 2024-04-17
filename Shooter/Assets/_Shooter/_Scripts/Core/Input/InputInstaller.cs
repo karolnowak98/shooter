@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using System;
+using Zenject;
 
 namespace GlassyCode.Shooter.Core.Input
 {
@@ -7,7 +8,7 @@ namespace GlassyCode.Shooter.Core.Input
         public override void InstallBindings()
         {
             Container.Bind(typeof(InputManager), typeof(IInputManager), 
-                    typeof(IInitializable)).To<InputManager>().AsSingle().NonLazy();
+                    typeof(IInitializable), typeof(IDisposable)).To<InputManager>().AsSingle().NonLazy();
         }
     }
 }

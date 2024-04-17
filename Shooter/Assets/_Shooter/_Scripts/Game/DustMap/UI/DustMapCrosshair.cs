@@ -1,11 +1,11 @@
+using Zenject;
 using GlassyCode.Shooter.Core.UI;
 using GlassyCode.Shooter.Game.AimMap.Enums;
 using GlassyCode.Shooter.Game.DustMap.Logic;
-using Zenject;
 
 namespace GlassyCode.Shooter.Game.DustMap.UI
 {
-    public class DustMapCrosshair : Panel
+    public class DustMapCrosshair : Crosshair
     {
         private IDustMapManager _dustMapManager;
         

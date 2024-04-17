@@ -1,5 +1,5 @@
-using GlassyCode.Shooter.Core.Time.UI;
 using Zenject;
+using GlassyCode.Shooter.Core.Time.UI;
 using GlassyCode.Shooter.Game.AimMap.Enums;
 using GlassyCode.Shooter.Game.DustMap.Logic;
 
@@ -33,7 +33,7 @@ namespace GlassyCode.Shooter.Game.DustMap.UI
 
         private void ResetPanel(float remainingTime)
         {
-            TimeLeftTmp.text = $"{remainingTime:N1}";
+            SetTimeLeftTmp(remainingTime);
             Show();
         }
     }

@@ -1,6 +1,6 @@
-using GlassyCode.Shooter.Game.AimMap.Data;
 using UnityEngine;
 using Zenject;
+using GlassyCode.Shooter.Game.AimMap.Data;
 
 namespace GlassyCode.Shooter.Game.AimMap.Logic
 {

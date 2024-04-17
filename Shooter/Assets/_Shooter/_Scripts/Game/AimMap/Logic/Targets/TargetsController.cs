@@ -1,16 +1,16 @@
 using System;
+using UnityEngine;
+using Object = UnityEngine.Object;
 using GlassyCode.Shooter.Core.Utility;
 using GlassyCode.Shooter.Game.AimMap.Data;
 using GlassyCode.Shooter.Game.Player.Logic.Shooting;
 using GlassyCode.Shooter.Game.Props.Logic;
-using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace GlassyCode.Shooter.Game.AimMap.Logic.Targets
 {
     public class TargetsController : ITargetsController, IDisposable
     {
-        private IShootingController _shootingController;
+        private readonly IShootingController _shootingController;
         private readonly BoxCollider _targetsSpawnArea;
         private readonly GameObject _targetPrefab;
         private readonly uint _hitsCondition;
