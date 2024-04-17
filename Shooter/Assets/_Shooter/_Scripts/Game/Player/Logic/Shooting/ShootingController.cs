@@ -57,9 +57,10 @@ namespace GlassyCode.Shooter.Game.Player.Logic.Shooting
 
         public void DisableShooting()
         {
-            RemoveListeners();
-            _weaponManager.DisableWeaponSwapping();
             _canShoot = false;
+            _isShooting = false;
+            _weaponManager.DisableWeaponSwapping();
+            RemoveListeners();
         }
         
         private void AddListeners()

@@ -1,13 +1,13 @@
 using GlassyCode.Shooter.Core.UI.Logic;
 
-namespace GlassyCode.Shooter.Game.DustMap.UI
+namespace GlassyCode.Shooter.Game.AimMap.UI
 {
-    public sealed class DustMapDialogue : Dialogue, IDustMapDialogue
+    public class AimMapDialogue : Dialogue, IAimMapDialogue
     {
         public DialogueLine SuccessLine { get; }
         public DialogueLine FailureLine { get; }
         
-        public DustMapDialogue(DialogueLine successLine, DialogueLine failureLine)
+        public AimMapDialogue(DialogueLine successLine, DialogueLine failureLine)
         {
             SuccessLine = successLine;
             FailureLine = failureLine;

@@ -47,8 +47,6 @@ namespace GlassyCode.Shooter.Game.DustMap.UI
 
         private void InitDialogue()
         {
-            _playerLinesBtn.onClick.AddListener(SetNextLine);
-            
             var successLine = new DialogueLine
             {
                 CharacterLine = DustMapDialogues.SuccessSergeantLine, PlayerLine = DustMapDialogues.SuccessPlayerLine
@@ -68,6 +66,28 @@ namespace GlassyCode.Shooter.Game.DustMap.UI
             _dialogue.EnqueueLine(DustMapDialogues.FifthSergeantLine, DustMapDialogues.FifthPlayerLine);
             
             SetNextLine();
+            _playerLinesBtn.onClick.AddListener(SetNextLine);
+        }
+        
+        private void SetNextLine()
+        {
+            var nextLine = _dialogue.GetNextLine();
+
+            if (nextLine.HasValue)
+            {
+                SetPanel(nextLine.Value);
+            }
+            else
+            {
+                _playerLinesBtn.onClick.RemoveAllListeners();
+                StartMission();
+            }
+        }
+        
+        private void SetPanel(DialogueLine line)
+        {
+            _sergeantLinesTmp.text = line.CharacterLine;
+            _playerLinesTmp.text = line.PlayerLine;
         }
 
         private void SetFinishPanel(RoundResult roundResult)
@@ -101,27 +121,6 @@ namespace GlassyCode.Shooter.Game.DustMap.UI
             _playerLinesBtn.onClick.RemoveAllListeners();
             _playerLinesBtn.onClick.AddListener(() => _scenesController.LoadAimMapScene());
             Show();
-        }
-
-        private void SetNextLine()
-        {
-            var nextLine = _dialogue.GetNextLine();
-
-            if (nextLine.HasValue)
-            {
-                SetPanel(nextLine.Value);
-            }
-            else
-            {
-                _playerLinesBtn.onClick.RemoveAllListeners();
-                StartMission();
-            }
-        }
-        
-        private void SetPanel(DialogueLine line)
-        {
-            _sergeantLinesTmp.text = line.CharacterLine;
-            _playerLinesTmp.text = line.PlayerLine;
         }
 
         private void StartMission()
